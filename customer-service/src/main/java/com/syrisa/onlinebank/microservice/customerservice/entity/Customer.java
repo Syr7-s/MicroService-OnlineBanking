@@ -46,6 +46,7 @@ public class Customer {
                 .customerPhone(this.customerPhone)
                 .customerEmail(this.customerEmail)
                 .customerBirthDate(this.customerBirthDate)
+                .isState(this.isState)
                 .address(this.address)
                 .build();
     }
