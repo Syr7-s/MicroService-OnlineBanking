@@ -21,13 +21,16 @@ import java.time.LocalDate;
 public class Customer {
     @Id
     private long customerTC;
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "customerName is invalid")
     private String customerName;
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "customerLastName is invalid")
     private String customerLastname;
     @Enumerated(EnumType.STRING)
     private Gender customerGender;
     @Pattern(regexp = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$", message = "Phone Number Ex:+(123)-456-78-90")
     @Length(min = 18, max = 18)
     private String customerPhone;
+    @Pattern(regexp = "^(.+)@(.+)$", message = "email is invalid.")
     private String customerEmail;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate customerBirthDate;
