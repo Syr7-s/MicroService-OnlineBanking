@@ -2,6 +2,7 @@ package com.syrisa.onlinebank.microservice.customerservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.syrisa.onlinebank.microservice.customerservice.dto.CustomerDto;
 import com.syrisa.onlinebank.microservice.customerservice.utility.enums.Gender;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -35,4 +36,17 @@ public class Customer {
     @JoinColumn(name="address_id")
     @JsonIgnore
     private Address address;
+
+    public CustomerDto toCustomerDto() {
+        return CustomerDto.builder()
+                .customerTC(this.customerTC)
+                .customerName(this.customerName)
+                .customerLastname(this.customerLastname)
+                .customerGender(this.customerGender)
+                .customerPhone(this.customerPhone)
+                .customerEmail(this.customerEmail)
+                .customerBirthDate(this.customerBirthDate)
+                .address(this.address)
+                .build();
+    }
 }
