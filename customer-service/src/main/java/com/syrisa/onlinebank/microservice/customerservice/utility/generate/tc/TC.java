@@ -8,7 +8,7 @@ public final class TC {
 
     }
 
-    public Supplier<Long> generateTC = () -> {
+    public static final Supplier<Long> generateTC = () -> {
         StringBuilder builder = new StringBuilder();
         builder.append(1 + new Random().nextInt(8));
         for (int i = 0; i < 10; i++) {
