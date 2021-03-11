@@ -43,7 +43,7 @@ public class CustomerController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/customer/update")
+    @PutMapping("/customer/update")
     @ResponseStatus(HttpStatus.CREATED)
     public CustomerDto update(@RequestBody CustomerDto customerDto) {
         try {
@@ -53,7 +53,7 @@ public class CustomerController {
         }
     }
 
-    @DeleteMapping("/customder/{customerTC}")
+    @DeleteMapping("/customer/{customerTC}")
     public String delete(@PathVariable("customerTC") long customerTC) {
         return customerService.delete(customerTC);
     }
