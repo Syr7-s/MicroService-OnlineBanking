@@ -35,7 +35,8 @@ public class CustomerServiceImpl implements CustomerService<Customer> {
 
     @Override
     public Customer get(long tc) {
-        return null;
+        return customerRepository.findById(tc)
+                .orElseThrow(() -> (new ResponseStatusException(HttpStatus.NOT_FOUND, tc + " number TC was not found")));
     }
 
     @Override
