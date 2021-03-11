@@ -2,6 +2,7 @@ package com.syrisa.onlinebank.microservice.customerservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.syrisa.onlinebank.microservice.customerservice.utility.enums.Gender;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -22,7 +23,7 @@ public class Customer {
     private String customerName;
     private String customerLastname;
     @Enumerated(EnumType.STRING)
-   // private Gender customerGender;
+    private Gender customerGender;
     @Pattern(regexp = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$", message = "Phone Number Ex:+(123)-456-78-90")
     @Length(min = 18, max = 18)
     private String customerPhone;
@@ -30,8 +31,8 @@ public class Customer {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate customerBirthDate;
     private boolean isState;
-  /*  @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="address_id")
     @JsonIgnore
-    private Address address;*/
+    private Address address;
 }
