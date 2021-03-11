@@ -48,6 +48,7 @@ public class CustomerServiceImpl implements CustomerService<Customer> {
         updatedCustomer.setCustomerPhone(customer.getCustomerPhone());
         updatedCustomer.setCustomerEmail(customer.getCustomerEmail());
         updatedCustomer.setCustomerBirthDate(customer.getCustomerBirthDate());
+        updatedCustomer.setState(customer.isState());
         updatedCustomer.setAddress(customer.getAddress());
         return customerRepository.save(updatedCustomer);
     }
