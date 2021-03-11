@@ -54,7 +54,9 @@ public class CustomerServiceImpl implements CustomerService<Customer> {
 
     @Override
     public String delete(long tc) {
-        return null;
+        Customer customer = get(tc);
+        customerRepository.delete(customer);
+        return tc + " number TC was deleted";
     }
 
     @Override
