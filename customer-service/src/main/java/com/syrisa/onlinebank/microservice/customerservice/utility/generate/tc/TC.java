@@ -1,4 +1,19 @@
 package com.syrisa.onlinebank.microservice.customerservice.utility.generate.tc;
 
-public class TC {
+import java.util.Random;
+import java.util.function.Supplier;
+
+public final class TC {
+    private TC() {
+
+    }
+
+    public Supplier<Long> generateTC = () -> {
+        StringBuilder builder = new StringBuilder();
+        builder.append(1 + new Random().nextInt(8));
+        for (int i = 0; i < 10; i++) {
+            builder.append(new Random().nextInt(10));
+        }
+        return Long.parseLong(builder.toString());
+    };
 }
