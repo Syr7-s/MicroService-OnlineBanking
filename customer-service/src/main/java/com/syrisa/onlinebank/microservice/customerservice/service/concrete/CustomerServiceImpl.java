@@ -41,7 +41,15 @@ public class CustomerServiceImpl implements CustomerService<Customer> {
 
     @Override
     public Customer update(Customer customer) {
-        return null;
+        Customer updatedCustomer = get(customer.getCustomerTC());
+        updatedCustomer.setCustomerName(customer.getCustomerName());
+        updatedCustomer.setCustomerLastname(customer.getCustomerLastname());
+        updatedCustomer.setCustomerGender(customer.getCustomerGender());
+        updatedCustomer.setCustomerPhone(customer.getCustomerPhone());
+        updatedCustomer.setCustomerEmail(customer.getCustomerEmail());
+        updatedCustomer.setCustomerBirthDate(customer.getCustomerBirthDate());
+        updatedCustomer.setAddress(customer.getAddress());
+        return customerRepository.save(updatedCustomer);
     }
 
     @Override
