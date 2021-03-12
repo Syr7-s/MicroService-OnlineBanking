@@ -26,16 +26,11 @@ public class CustomerController {
 
     @PostMapping("/customer")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<URI> create(@RequestBody CustomerDto customerDto) {
+    public CustomerDto create(@RequestBody CustomerDto customerDto) {
         try {
-            CustomerDto editedCustomer = customerService.create(customerDto.toCustomer()).toCustomerDto();
-            URI location = ServletUriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/v1/customer")
-                    .path("/{customerTC}")
-                    .buildAndExpand(editedCustomer.toCustomer().getCustomerTC())
-                    .toUri();
-            return ResponseEntity.created(location).build();
-        } catch (Exception exception){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,exception.getMessage());
+            return customerService.create(customerDto.toCustomer()).toCustomerDto();
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
     }
 
@@ -61,7 +56,7 @@ public class CustomerController {
         }
     }
 
-    @DeleteMapping("/customer/{customerTC}")
+    @DeleteMapping("/customer/delete/{customerTC}")
     public String delete(@PathVariable("customerTC") long customerTC) {
         return customerService.delete(customerTC);
     }
