@@ -5,10 +5,13 @@ import com.syrisa.onlinebank.microservice.customerservice.entity.Customer;
 import com.syrisa.onlinebank.microservice.customerservice.service.abstrct.CustomerService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.constraints.Min;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,11 +26,16 @@ public class CustomerController {
 
     @PostMapping("/customer")
     @ResponseStatus(HttpStatus.CREATED)
-    public CustomerDto create(@RequestBody CustomerDto customerDto) {
+    public ResponseEntity<URI> create(@RequestBody CustomerDto customerDto) {
         try {
-            return customerService.create(customerDto.toCustomer()).toCustomerDto();
-        } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+            CustomerDto editedCustomer = customerService.create(customerDto.toCustomer()).toCustomerDto();
+            URI location = ServletUriComponentsBuilder.fromHttpUrl("http://localhost:8080/api/v1/customer")
+                    .path("/{customerTC}")
+                    .buildAndExpand(editedCustomer.toCustomer().getCustomerTC())
+                    .toUri();
+            return ResponseEntity.created(location).build();
+        } catch (Exception exception){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,exception.getMessage());
         }
     }
 

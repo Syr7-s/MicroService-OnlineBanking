@@ -1,10 +1,11 @@
 package com.syrisa.onlinebank.microservice.customerservice.service.abstrct;
 
+import com.syrisa.onlinebank.microservice.customerservice.entity.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface CustomerService<T> {
-    T create(T t);
+    Customer create(T t);
 
     T get(long tc);
 
