@@ -1,17 +1,16 @@
-package com.syrisa.onlinebank.microservice.onlinebankbff.entity;
+package com.syrisa.onlinebank.microservice.onlinebankbff.dto;
 
-import com.syrisa.onlinebank.microservice.onlinebankbff.dto.CustomerDto;
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.Address;
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.Customer;
 import com.syrisa.onlinebank.microservice.onlinebankbff.utility.enums.gender.Gender;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Builder
-public class Customer {
+public class CustomerDto {
     private long customerTC;
     private String customerName;
     private String customerLastname;
@@ -22,8 +21,8 @@ public class Customer {
     private boolean isState;
     private Address address;
 
-    public CustomerDto toCustomerDto() {
-        return CustomerDto.builder()
+    public Customer toCustomer() {
+        return Customer.builder()
                 .customerTC(this.customerTC)
                 .customerName(this.customerName)
                 .customerLastname(this.customerLastname)
@@ -31,6 +30,7 @@ public class Customer {
                 .customerPhone(this.customerPhone)
                 .customerEmail(this.customerEmail)
                 .customerBirthDate(this.customerBirthDate)
+                .isState(this.isState)
                 .address(this.address)
                 .build();
     }
