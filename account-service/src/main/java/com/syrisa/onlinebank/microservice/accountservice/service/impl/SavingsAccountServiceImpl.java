@@ -4,6 +4,8 @@ import com.syrisa.onlinebank.microservice.accountservice.entity.SavingsAccount;
 import com.syrisa.onlinebank.microservice.accountservice.service.SavingsAccountService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SavingsAccountServiceImpl implements SavingsAccountService {
     @Override
@@ -23,6 +25,11 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 
     @Override
     public SavingsAccount getAccountByIBAN(String accountIBAN) {
+        return null;
+    }
+
+    @Override
+    public List<SavingsAccount> getAccountByCustomers(long customerTC) {
         return null;
     }
 

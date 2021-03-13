@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Service
 public class DemandDepositAccountServiceImpl implements DemandDepositAccountService {
     private final DemandDepositAccountRepository demandDepositAccountRepository;
@@ -42,6 +44,11 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
         }else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account is not found.");
         }
+    }
+
+    @Override
+    public List<DemandDepositAccount> getAccountByCustomers(long customerTC) {
+        return null;
     }
 
     @Override
