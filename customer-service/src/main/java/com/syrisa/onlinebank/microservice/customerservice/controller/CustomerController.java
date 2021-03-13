@@ -2,16 +2,13 @@ package com.syrisa.onlinebank.microservice.customerservice.controller;
 
 import com.syrisa.onlinebank.microservice.customerservice.dto.CustomerDto;
 import com.syrisa.onlinebank.microservice.customerservice.entity.Customer;
-import com.syrisa.onlinebank.microservice.customerservice.service.abstrct.CustomerService;
+import com.syrisa.onlinebank.microservice.customerservice.service.CustomerService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.constraints.Min;
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 

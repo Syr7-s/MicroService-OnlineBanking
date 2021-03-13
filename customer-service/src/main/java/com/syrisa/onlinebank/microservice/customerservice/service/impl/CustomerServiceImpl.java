@@ -1,10 +1,10 @@
-package com.syrisa.onlinebank.microservice.customerservice.service.concrete;
+package com.syrisa.onlinebank.microservice.customerservice.service.impl;
 
 
 import com.syrisa.onlinebank.microservice.customerservice.entity.Customer;
 import com.syrisa.onlinebank.microservice.customerservice.repository.AddressRepository;
 import com.syrisa.onlinebank.microservice.customerservice.repository.CustomerRepository;
-import com.syrisa.onlinebank.microservice.customerservice.service.abstrct.CustomerService;
+import com.syrisa.onlinebank.microservice.customerservice.service.CustomerService;
 import com.syrisa.onlinebank.microservice.customerservice.utility.generate.tc.TC;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

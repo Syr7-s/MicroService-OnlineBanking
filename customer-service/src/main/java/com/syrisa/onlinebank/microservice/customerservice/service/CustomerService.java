@@ -1,4 +1,4 @@
-package com.syrisa.onlinebank.microservice.customerservice.service.abstrct;
+package com.syrisa.onlinebank.microservice.customerservice.service;
 
 import com.syrisa.onlinebank.microservice.customerservice.entity.Customer;
 import org.springframework.data.domain.Page;

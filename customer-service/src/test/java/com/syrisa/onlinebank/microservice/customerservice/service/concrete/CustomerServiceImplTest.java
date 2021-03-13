@@ -2,6 +2,7 @@ package com.syrisa.onlinebank.microservice.customerservice.service.concrete;
 
 import com.syrisa.onlinebank.microservice.customerservice.entity.Customer;
 import com.syrisa.onlinebank.microservice.customerservice.repository.CustomerRepository;
+import com.syrisa.onlinebank.microservice.customerservice.service.impl.CustomerServiceImpl;
 import com.syrisa.onlinebank.microservice.customerservice.utility.enums.Gender;
 import com.syrisa.onlinebank.microservice.customerservice.utility.generate.tc.TC;
 import org.junit.jupiter.api.Assertions;
@@ -17,8 +18,6 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
 import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
