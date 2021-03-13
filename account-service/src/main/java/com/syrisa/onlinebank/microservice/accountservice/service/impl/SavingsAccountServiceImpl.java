@@ -3,6 +3,8 @@ package com.syrisa.onlinebank.microservice.accountservice.service.impl;
 import com.syrisa.onlinebank.microservice.accountservice.entity.SavingsAccount;
 import com.syrisa.onlinebank.microservice.accountservice.repository.SavingsAccountRepository;
 import com.syrisa.onlinebank.microservice.accountservice.service.SavingsAccountService;
+import com.syrisa.onlinebank.microservice.accountservice.utility.generate.account.Account;
+import com.syrisa.onlinebank.microservice.accountservice.utility.generate.iban.Iban;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,6 +21,9 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 
     @Override
     public SavingsAccount create(SavingsAccount savingsAccount) {
+        String accountNumber = Account.generateAccount.get();
+        savingsAccount.setAccountNumber(Long.parseLong(accountNumber));
+        savingsAccount.setAccountIban(Iban.generateIban.apply(accountNumber));
         return savingsAccountRepository.save(savingsAccount);
     }
 
