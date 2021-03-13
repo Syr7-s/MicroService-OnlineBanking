@@ -3,10 +3,14 @@ package com.syrisa.onlinebank.microservice.accountservice.controller;
 import com.syrisa.onlinebank.microservice.accountservice.dto.DemandDepositAccountDto;
 import com.syrisa.onlinebank.microservice.accountservice.dto.ExtractOfAccountDto;
 import com.syrisa.onlinebank.microservice.accountservice.dto.SavingsAccountDto;
+import com.syrisa.onlinebank.microservice.accountservice.entity.ExtractOfAccount;
 import com.syrisa.onlinebank.microservice.accountservice.service.ExtractOfAccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -57,5 +61,12 @@ public class AccountProcessController {
         }
     }
 
+    @GetMapping("/account/process")
+    public List<ExtractOfAccountDto> getAllProcess() {
+        return extractOfAccountService.getAllProcess()
+                .stream()
+                .map(ExtractOfAccount::toExtractOfAccountDto)
+                .collect(Collectors.toList());
+    }
 
 }

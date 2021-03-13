@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -91,6 +92,16 @@ public class ExtractOfAccountImpl implements ExtractOfAccountService {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
 
+    }
+
+    @Override
+    public List<ExtractOfAccount> getAllProcess() {
+        List<ExtractOfAccount> extractOfAccounts = extractOfAccountRepository.findAll();
+        if (!extractOfAccounts.isEmpty()){
+            return extractOfAccounts;
+        }else{
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Extract of Account is empty.");
+        }
     }
 
     private void getDataAndTime(ExtractOfAccount extractOfAccount) {
