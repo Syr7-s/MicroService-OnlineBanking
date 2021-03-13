@@ -1,4 +1,6 @@
 package com.syrisa.onlinebank.microservice.accountservice.service;
 
-public interface DemandDepositAccountService {
+import com.syrisa.onlinebank.microservice.accountservice.entity.DemandDepositAccount;
+
+public interface DemandDepositAccountService extends AccountService<DemandDepositAccount>{
 }
