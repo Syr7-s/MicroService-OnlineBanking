@@ -3,6 +3,8 @@ package com.syrisa.onlinebank.microservice.accountservice.service.impl;
 import com.syrisa.onlinebank.microservice.accountservice.entity.DemandDepositAccount;
 import com.syrisa.onlinebank.microservice.accountservice.repository.DemandDepositAccountRepository;
 import com.syrisa.onlinebank.microservice.accountservice.service.DemandDepositAccountService;
+import com.syrisa.onlinebank.microservice.accountservice.utility.generate.account.Account;
+import com.syrisa.onlinebank.microservice.accountservice.utility.generate.iban.Iban;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,6 +21,9 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
 
     @Override
     public DemandDepositAccount create(DemandDepositAccount demandDepositAccount) {
+        String accountNumber = Account.generateAccount.get();
+        demandDepositAccount.setAccountNumber(Long.parseLong(accountNumber));
+        demandDepositAccount.setAccountIban(Iban.generateIban.apply(accountNumber));
         return demandDepositAccountRepository.save(demandDepositAccount);
     }
 
