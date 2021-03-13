@@ -1,5 +1,6 @@
 package com.syrisa.onlinebank.microservice.accountservice.controller;
 
+import com.syrisa.onlinebank.microservice.accountservice.dto.SavingsAccountDto;
 import com.syrisa.onlinebank.microservice.accountservice.entity.SavingsAccount;
 import com.syrisa.onlinebank.microservice.accountservice.service.SavingsAccountService;
 import org.springframework.http.HttpStatus;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -19,37 +21,50 @@ public class SavingsAccountController {
 
     @PostMapping("/savings")
     @ResponseStatus(HttpStatus.CREATED)
-    public SavingsAccount create(@RequestBody SavingsAccount savingsAccount) {
-        return savingsAccountService.create(savingsAccount);
+    public SavingsAccountDto create(@RequestBody SavingsAccountDto savingsAccountDto) {
+        try {
+            return savingsAccountService.create(savingsAccountDto.toSavingsAccount()).toSavingsAccountDto();
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+
     }
 
     @PutMapping("/savings")
     @ResponseStatus(HttpStatus.CREATED)
-    public SavingsAccount update(@RequestBody SavingsAccount savingsAccount){
-        return savingsAccountService.update(savingsAccount);
+    public SavingsAccountDto update(@RequestBody SavingsAccountDto savingsAccountDto) {
+        try {
+            return savingsAccountService.update(savingsAccountDto.toSavingsAccount()).toSavingsAccountDto();
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
     }
 
     @GetMapping("/savings/accountNumber/{accountNumber}")
-    public SavingsAccount get(@PathVariable("accountNumber") long accountNumber){
+    public SavingsAccountDto get(@PathVariable("accountNumber") long accountNumber) {
         try {
-            return savingsAccountService.get(accountNumber);
+            return savingsAccountService.get(accountNumber).toSavingsAccountDto();
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }
     }
 
     @GetMapping("/savings/iban/{accountIban}")
-    public SavingsAccount getDemandDepositAccountByAccountIban(@PathVariable("accountIban") String accountIban) {
+    public SavingsAccountDto getDemandDepositAccountByAccountIban(@PathVariable("accountIban") String accountIban) {
         try {
-            return savingsAccountService.getAccountByIBAN(accountIban);
+            return savingsAccountService.getAccountByIBAN(accountIban).toSavingsAccountDto();
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }
     }
+
     @GetMapping("/savings/{customerTC}")
-    public List<SavingsAccount> getDemandDepositAccountByCustomerTC(@PathVariable("customerTC") long customerTC) {
+    public List<SavingsAccountDto> getDemandDepositAccountByCustomerTC(@PathVariable("customerTC") long customerTC) {
         try {
-            return savingsAccountService.getAccountByCustomers(customerTC);
+            return savingsAccountService.getAccountByCustomers(customerTC)
+                    .stream()
+                    .map(SavingsAccount::toSavingsAccountDto)
+                    .collect(Collectors.toList());
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }

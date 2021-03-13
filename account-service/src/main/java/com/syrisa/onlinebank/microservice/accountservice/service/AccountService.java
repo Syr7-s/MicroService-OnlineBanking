@@ -1,8 +1,8 @@
 package com.syrisa.onlinebank.microservice.accountservice.service;
 
-import com.syrisa.onlinebank.microservice.accountservice.entity.Account;
+
 import java.util.List;
-public interface AccountService<T extends Account> {
+public interface AccountService<T> {
     T create(T t);
 
     T update(T t);

@@ -1,5 +1,6 @@
 package com.syrisa.onlinebank.microservice.accountservice.controller;
 
+import com.syrisa.onlinebank.microservice.accountservice.dto.DemandDepositAccountDto;
 import com.syrisa.onlinebank.microservice.accountservice.entity.DemandDepositAccount;
 import com.syrisa.onlinebank.microservice.accountservice.service.DemandDepositAccountService;
 import org.springframework.http.HttpStatus;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -19,38 +21,41 @@ public class DemandDepositAccountController {
 
     @PostMapping("/demand")
     @ResponseStatus(HttpStatus.CREATED)
-    public DemandDepositAccount create(@RequestBody DemandDepositAccount demandDepositAccount) {
-        return demandDepositAccountService.create(demandDepositAccount);
+    public DemandDepositAccountDto create(@RequestBody DemandDepositAccountDto demandDepositAccountDto) {
+        return demandDepositAccountService.create(demandDepositAccountDto.toDemandDepositAccount()).toDemandDepositAccountDto();
     }
 
     @PutMapping("/demand")
     @ResponseStatus(HttpStatus.CREATED)
-    public DemandDepositAccount update(@RequestBody DemandDepositAccount demandDepositAccount) {
-        return demandDepositAccountService.update(demandDepositAccount);
+    public DemandDepositAccountDto update(@RequestBody DemandDepositAccountDto demandDepositAccountDto) {
+        return demandDepositAccountService.update(demandDepositAccountDto.toDemandDepositAccount()).toDemandDepositAccountDto();
     }
 
     @GetMapping("/demand/accountNumber/{accountNumber}")
-    public DemandDepositAccount get(@PathVariable("accountNumber") long accountNumber) {
+    public DemandDepositAccountDto get(@PathVariable("accountNumber") long accountNumber) {
         try {
-            return demandDepositAccountService.get(accountNumber);
+            return demandDepositAccountService.get(accountNumber).toDemandDepositAccountDto();
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }
     }
 
     @GetMapping("/demand/iban/{accountIban}")
-    public DemandDepositAccount getDemandDepositAccountByAccountIban(@PathVariable("accountIban") String accountIban) {
+    public DemandDepositAccountDto getDemandDepositAccountByAccountIban(@PathVariable("accountIban") String accountIban) {
         try {
-            return demandDepositAccountService.getAccountByIBAN(accountIban);
+            return demandDepositAccountService.getAccountByIBAN(accountIban).toDemandDepositAccountDto();
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }
     }
 
     @GetMapping("/demands/{customerTC}")
-    public List<DemandDepositAccount> getDemandDepositAccountByCustomerTC(@PathVariable("customerTC") long customerTC) {
+    public List<DemandDepositAccountDto> getDemandDepositAccountByCustomerTC(@PathVariable("customerTC") long customerTC) {
         try {
-            return demandDepositAccountService.getAccountByCustomers(customerTC);
+            return demandDepositAccountService.getAccountByCustomers(customerTC)
+                    .stream()
+                    .map(DemandDepositAccount::toDemandDepositAccountDto)
+                    .collect(Collectors.toList());
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }

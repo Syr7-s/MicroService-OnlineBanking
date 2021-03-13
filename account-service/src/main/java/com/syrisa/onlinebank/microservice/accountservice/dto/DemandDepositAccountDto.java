@@ -1,16 +1,17 @@
 package com.syrisa.onlinebank.microservice.accountservice.dto;
 
+
+import com.syrisa.onlinebank.microservice.accountservice.entity.DemandDepositAccount;
 import com.syrisa.onlinebank.microservice.accountservice.utility.currency.Currency;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
 
-@EqualsAndHashCode(callSuper = true)
+
 @Data
 @Builder
-public class DemandDepositAccountDto extends AccountDto {
+public class DemandDepositAccountDto{
     private long accountNumber;
     private String accountIban;
     private int accountBalance;
@@ -18,8 +19,8 @@ public class DemandDepositAccountDto extends AccountDto {
     private LocalDate accountCreationDate;
     private long customerTC;
 
-    public DemandDepositAccountDto toDemandDepositAccountDto() {
-        return (DemandDepositAccountDto) AccountDto.builder()
+    public DemandDepositAccount toDemandDepositAccount(){
+        return DemandDepositAccount.builder()
                 .accountNumber(this.accountNumber)
                 .accountIban(this.accountIban)
                 .accountBalance(this.accountBalance)
@@ -28,4 +29,6 @@ public class DemandDepositAccountDto extends AccountDto {
                 .customerTC(this.customerTC)
                 .build();
     }
+
+
 }
