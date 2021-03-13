@@ -29,7 +29,7 @@ public class DemandDepositAccountController {
         return demandDepositAccountService.update(demandDepositAccount);
     }
 
-    @GetMapping("/demand/{accountNumber}")
+    @GetMapping("/demand/accountNumber/{accountNumber}")
     public DemandDepositAccount get(@PathVariable("accountNumber") long accountNumber) {
         try {
             return demandDepositAccountService.get(accountNumber);
@@ -38,7 +38,7 @@ public class DemandDepositAccountController {
         }
     }
 
-    @GetMapping("/demand/{accountIban}")
+    @GetMapping("/demand/iban/{accountIban}")
     public DemandDepositAccount getDemandDepositAccountByAccountIban(@PathVariable("accountIban") String accountIban) {
         try {
             return demandDepositAccountService.getAccountByIBAN(accountIban);

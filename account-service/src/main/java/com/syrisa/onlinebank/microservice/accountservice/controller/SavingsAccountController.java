@@ -29,7 +29,7 @@ public class SavingsAccountController {
         return savingsAccountService.update(savingsAccount);
     }
 
-    @GetMapping("/savings/{accountNumber}")
+    @GetMapping("/savings/accountNumber/{accountNumber}")
     public SavingsAccount get(@PathVariable("accountNumber") long accountNumber){
         try {
             return savingsAccountService.get(accountNumber);
@@ -38,7 +38,7 @@ public class SavingsAccountController {
         }
     }
 
-    @GetMapping("/savings/{accountIban}")
+    @GetMapping("/savings/iban/{accountIban}")
     public SavingsAccount getDemandDepositAccountByAccountIban(@PathVariable("accountIban") String accountIban) {
         try {
             return savingsAccountService.getAccountByIBAN(accountIban);
