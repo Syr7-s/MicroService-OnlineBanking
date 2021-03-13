@@ -39,16 +39,21 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
     @Override
     public DemandDepositAccount getAccountByIBAN(String accountIBAN) {
         DemandDepositAccount demandDepositAccount = demandDepositAccountRepository.getDemandDepositAccountsByAccountIban(accountIBAN);
-        if (demandDepositAccount != null){
+        if (demandDepositAccount != null) {
             return demandDepositAccount;
-        }else{
+        } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account is not found.");
         }
     }
 
     @Override
     public List<DemandDepositAccount> getAccountByCustomers(long customerTC) {
-        return null;
+        List<DemandDepositAccount> demandDepositAccounts = demandDepositAccountRepository.getDemandDepositAccountsByCustomerTC(customerTC);
+        if (!demandDepositAccounts.isEmpty()) {
+            return demandDepositAccounts;
+        } else {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Customer have not accounts");
+        }
     }
 
     @Override
