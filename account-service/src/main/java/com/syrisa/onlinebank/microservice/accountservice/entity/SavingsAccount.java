@@ -6,8 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Document
 public class SavingsAccount extends Account{
     private int termTime;

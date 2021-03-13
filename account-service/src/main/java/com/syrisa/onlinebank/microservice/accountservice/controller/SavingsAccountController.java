@@ -1,6 +1,5 @@
 package com.syrisa.onlinebank.microservice.accountservice.controller;
 
-import com.syrisa.onlinebank.microservice.accountservice.entity.DemandDepositAccount;
 import com.syrisa.onlinebank.microservice.accountservice.entity.SavingsAccount;
 import com.syrisa.onlinebank.microservice.accountservice.service.SavingsAccountService;
 import org.springframework.http.HttpStatus;
