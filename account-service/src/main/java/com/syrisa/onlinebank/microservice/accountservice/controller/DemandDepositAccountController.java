@@ -17,19 +17,19 @@ public class DemandDepositAccountController {
         this.demandDepositAccountService = demandDepositAccountService;
     }
 
-    @PostMapping
+    @PostMapping("/demand")
     @ResponseStatus(HttpStatus.CREATED)
     public DemandDepositAccount create(@RequestBody DemandDepositAccount demandDepositAccount) {
         return demandDepositAccountService.create(demandDepositAccount);
     }
 
-    @PutMapping
+    @PutMapping("/demand")
     @ResponseStatus(HttpStatus.CREATED)
     public DemandDepositAccount update(@RequestBody DemandDepositAccount demandDepositAccount) {
         return demandDepositAccountService.update(demandDepositAccount);
     }
 
-    @GetMapping("/{accountNumber}")
+    @GetMapping("/demand/{accountNumber}")
     public DemandDepositAccount get(@PathVariable("accountNumber") long accountNumber) {
         try {
             return demandDepositAccountService.get(accountNumber);
@@ -38,7 +38,7 @@ public class DemandDepositAccountController {
         }
     }
 
-    @GetMapping("/{accountIban}")
+    @GetMapping("/demand/{accountIban}")
     public DemandDepositAccount getDemandDepositAccountByAccountIban(@PathVariable("accountIban") String accountIban) {
         try {
             return demandDepositAccountService.getAccountByIBAN(accountIban);
@@ -56,7 +56,7 @@ public class DemandDepositAccountController {
         }
     }
 
-    @DeleteMapping("/{accountNumber}")
+    @DeleteMapping("/demand/{accountNumber}")
     public String delete(@PathVariable("accountNumber") long accountNumber) {
         try {
             return demandDepositAccountService.delete(accountNumber);
