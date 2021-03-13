@@ -1,33 +1,57 @@
 package com.syrisa.onlinebank.microservice.accountservice.service.impl;
 
 import com.syrisa.onlinebank.microservice.accountservice.entity.DemandDepositAccount;
+import com.syrisa.onlinebank.microservice.accountservice.repository.DemandDepositAccountRepository;
 import com.syrisa.onlinebank.microservice.accountservice.service.DemandDepositAccountService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class DemandDepositAccountServiceImpl implements DemandDepositAccountService {
+    private final DemandDepositAccountRepository demandDepositAccountRepository;
+
+    public DemandDepositAccountServiceImpl(DemandDepositAccountRepository demandDepositAccountRepository) {
+        this.demandDepositAccountRepository = demandDepositAccountRepository;
+    }
+
     @Override
     public DemandDepositAccount create(DemandDepositAccount demandDepositAccount) {
-        return null;
+        return demandDepositAccountRepository.save(demandDepositAccount);
     }
 
     @Override
     public DemandDepositAccount update(DemandDepositAccount demandDepositAccount) {
-        return null;
+        if (get(demandDepositAccount.getAccountNumber()) != null) {
+            return demandDepositAccountRepository.save(demandDepositAccount);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found");
+        }
     }
 
     @Override
     public DemandDepositAccount get(long accountNumber) {
-        return null;
+        return demandDepositAccountRepository.findById(accountNumber).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
     }
 
     @Override
     public DemandDepositAccount getAccountByIBAN(String accountIBAN) {
-        return null;
+        DemandDepositAccount demandDepositAccount = demandDepositAccountRepository.getDemandDepositAccountsByAccountIban(accountIBAN);
+        if (demandDepositAccount != null){
+            return demandDepositAccount;
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account is not found.");
+        }
     }
 
     @Override
     public String delete(long accountNumber) {
-        return null;
+        DemandDepositAccount demandDepositAccount = get(accountNumber);
+        if (demandDepositAccount.getAccountBalance() == 0) {
+            demandDepositAccountRepository.delete(demandDepositAccount);
+            return demandDepositAccount.getAccountNumber() + " number account was deleted.";
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Have money in your account");
+        }
     }
 }
