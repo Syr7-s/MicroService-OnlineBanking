@@ -1,22 +1,31 @@
 package com.syrisa.onlinebank.microservice.accountservice.service.impl;
 
 import com.syrisa.onlinebank.microservice.accountservice.entity.DemandDepositAccount;
+import com.syrisa.onlinebank.microservice.accountservice.entity.ExtractOfAccount;
 import com.syrisa.onlinebank.microservice.accountservice.repository.DemandDepositAccountRepository;
 import com.syrisa.onlinebank.microservice.accountservice.service.DemandDepositAccountService;
+import com.syrisa.onlinebank.microservice.accountservice.service.DepositAndWithdrawMoneyService;
+import com.syrisa.onlinebank.microservice.accountservice.service.ExtractOfAccountService;
 import com.syrisa.onlinebank.microservice.accountservice.utility.generate.account.Account;
 import com.syrisa.onlinebank.microservice.accountservice.utility.generate.iban.Iban;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
-public class DemandDepositAccountServiceImpl implements DemandDepositAccountService {
+public class DemandDepositAccountServiceImpl implements DemandDepositAccountService, DepositAndWithdrawMoneyService<DemandDepositAccount, ExtractOfAccount> {
     private final DemandDepositAccountRepository demandDepositAccountRepository;
+    private final ExtractOfAccountService<ExtractOfAccount> extractOfAccountService;
 
-    public DemandDepositAccountServiceImpl(DemandDepositAccountRepository demandDepositAccountRepository) {
+    public DemandDepositAccountServiceImpl(DemandDepositAccountRepository demandDepositAccountRepository, ExtractOfAccountService<ExtractOfAccount> extractOfAccountService) {
         this.demandDepositAccountRepository = demandDepositAccountRepository;
+        this.extractOfAccountService = extractOfAccountService;
     }
 
     @Override
@@ -71,4 +80,35 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Have money in your account");
         }
     }
+
+    @Transactional
+    @Override
+    public DemandDepositAccount depositMoneyAccount(ExtractOfAccount extractOfAccount) {
+        try {
+            DemandDepositAccount demandDepositAccount = get(extractOfAccount.getAccountNumber());
+            demandDepositAccount.setAccountBalance(demandDepositAccount.getAccountBalance() + extractOfAccount.getMoney());
+            extractOfAccountService.create(extractOfAccount);
+            return update(demandDepositAccount);
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error.");
+        }
+    }
+
+    @Transactional
+    @Override
+    public DemandDepositAccount withDrawMoneyAccount(ExtractOfAccount extractOfAccount) {
+        try {
+            DemandDepositAccount demandDepositAccount = get(extractOfAccount.getAccountNumber());
+            if (demandDepositAccount.getAccountBalance() - extractOfAccount.getMoney() > 0) {
+                demandDepositAccount.setAccountBalance(demandDepositAccount.getAccountBalance() - extractOfAccount.getMoney());
+                extractOfAccountService.create(extractOfAccount);
+                return update(demandDepositAccount);
+            } else {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Not enough money in your account.");
+            }
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
+
 }
