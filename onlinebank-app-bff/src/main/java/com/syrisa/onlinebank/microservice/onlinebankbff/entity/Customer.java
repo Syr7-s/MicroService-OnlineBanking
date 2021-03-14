@@ -5,6 +5,7 @@ import com.syrisa.onlinebank.microservice.onlinebankbff.utility.enums.gender.Gen
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,6 +22,8 @@ public class Customer {
     private LocalDate customerBirthDate;
     private boolean isState;
     private Address address;
+    private List<DemandDepositAccount> demandDepositAccounts;
+    private List<SavingsAccount> savingsAccounts;
 
     public CustomerDto toCustomerDto() {
         return CustomerDto.builder()
@@ -33,6 +36,8 @@ public class Customer {
                 .customerBirthDate(this.customerBirthDate)
                 .isState(this.isState)
                 .address(this.address)
+                .demandDepositAccounts(this.demandDepositAccounts)
+                .savingsAccounts(this.savingsAccounts)
                 .build();
     }
 }
