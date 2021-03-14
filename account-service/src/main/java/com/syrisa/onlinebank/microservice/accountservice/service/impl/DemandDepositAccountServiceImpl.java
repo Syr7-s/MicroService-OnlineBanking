@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class DemandDepositAccountServiceImpl implements DemandDepositAccountService, DepositAndWithdrawMoneyService<DemandDepositAccount, ExtractOfAccount> {
