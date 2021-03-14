@@ -9,9 +9,9 @@ import java.util.List;
 
 @FeignClient("account-service")
 public interface DemandDepositAccountServiceClient {
-    @GetMapping("/demands/{customerTC}")
+    @GetMapping("/api/v1/demands/{customerTC}")
     List<DemandDepositAccountDto> getDemandDepositAccountByCustomerTC(@PathVariable("customerTC") long customerTC);
 
-    @GetMapping("/demand/iban/{accountIban}")
+    @GetMapping("/api/v1/demand/iban/{accountIban}")
     DemandDepositAccountDto getDemandDepositAccountByAccountIban(@PathVariable("accountIban") String accountIban);
 }
