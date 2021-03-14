@@ -18,7 +18,7 @@ public class DemandDepositAccountController {
         this.demandDepositAccountService = demandDepositAccountService;
     }
 
-    @GetMapping("/demand}")
+    @GetMapping("/demand")
     public DemandDepositAccountDto getDemandDepositAccountByAccountIban(@RequestParam String accountIban) {
         try {
             return demandDepositAccountService.getAccountByIban(accountIban).toDemandDepositAccountDto();
