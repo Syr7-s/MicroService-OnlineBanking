@@ -4,8 +4,10 @@ import com.syrisa.onlinebank.microservice.onlinebankbff.client.DemandDepositAcco
 import com.syrisa.onlinebank.microservice.onlinebankbff.entity.DemandDepositAccount;
 import com.syrisa.onlinebank.microservice.onlinebankbff.service.DemandDepositAccountService;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+@Service
 public class DemandDepositAccountServiceImpl implements DemandDepositAccountService {
     private final DemandDepositAccountServiceClient demandDepositAccountServiceClient;
 
@@ -18,7 +20,7 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
         try {
             return demandDepositAccountServiceClient.getDemandDepositAccountByAccountIban(accountIban).toDemandDepositAccount();
         } catch (Exception exception) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account is not found.");
         }
 
     }
