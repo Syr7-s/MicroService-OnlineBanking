@@ -1,6 +1,6 @@
 package com.syrisa.onlinebank.microservice.onlinebankbff.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.syrisa.onlinebank.microservice.onlinebankbff.dto.SavingsAccountDto;
 import com.syrisa.onlinebank.microservice.onlinebankbff.utility.enums.currency.Currency;
 import lombok.*;
 
@@ -22,4 +22,19 @@ public class SavingsAccount {
     private double grossInterestReturn;
     private double savingsAccountNetGain;
     private double savingsAccountInterestRate;
+
+    public SavingsAccountDto toSavingsAccountDto() {
+        return SavingsAccountDto.builder()
+                .accountNumber(this.accountNumber)
+                .accountIban(this.accountIban)
+                .accountBalance(this.accountBalance)
+                .accountCurrency(this.accountCurrency)
+                .accountCreationDate(this.accountCreationDate)
+                .customerTC(this.customerTC)
+                .termTime(this.termTime)
+                .grossInterestReturn(this.grossInterestReturn)
+                .savingsAccountNetGain(this.savingsAccountNetGain)
+                .savingsAccountInterestRate(this.savingsAccountInterestRate)
+                .build();
+    }
 }
