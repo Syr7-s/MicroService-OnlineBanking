@@ -1,6 +1,5 @@
 package com.syrisa.onlinebank.microservice.onlinebankbff.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.syrisa.onlinebank.microservice.onlinebankbff.utility.enums.currency.Currency;
 import lombok.*;
 
