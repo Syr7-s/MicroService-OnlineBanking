@@ -1,5 +1,6 @@
 package com.syrisa.onlinebank.microservice.onlinebankbff.entity;
 
+import com.syrisa.onlinebank.microservice.onlinebankbff.dto.ExtractOfAccountDto;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -17,4 +18,14 @@ public class ExtractOfAccount {
     private int money;
     private LocalDate date;
     private LocalTime time;
+
+    public ExtractOfAccountDto toExtractOfAccountDto() {
+        return ExtractOfAccountDto.builder()
+                .id(this.id)
+                .accountNumber(this.accountNumber)
+                .money(this.money)
+                .date(this.date)
+                .time(this.time)
+                .build();
+    }
 }
