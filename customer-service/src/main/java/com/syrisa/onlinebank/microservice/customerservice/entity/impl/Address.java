@@ -1,6 +1,7 @@
-package com.syrisa.onlinebank.microservice.customerservice.entity;
+package com.syrisa.onlinebank.microservice.customerservice.entity.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.syrisa.onlinebank.microservice.customerservice.entity.Model;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Address {
+public class Address implements Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

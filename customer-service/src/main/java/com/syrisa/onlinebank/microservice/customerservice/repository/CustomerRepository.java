@@ -1,6 +1,6 @@
 package com.syrisa.onlinebank.microservice.customerservice.repository;
 
-import com.syrisa.onlinebank.microservice.customerservice.entity.Customer;
+import com.syrisa.onlinebank.microservice.customerservice.entity.impl.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;

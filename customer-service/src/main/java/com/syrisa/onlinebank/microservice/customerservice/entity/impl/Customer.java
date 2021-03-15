@@ -1,8 +1,9 @@
-package com.syrisa.onlinebank.microservice.customerservice.entity;
+package com.syrisa.onlinebank.microservice.customerservice.entity.impl;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.syrisa.onlinebank.microservice.customerservice.dto.CustomerDto;
+import com.syrisa.onlinebank.microservice.customerservice.entity.Model;
 import com.syrisa.onlinebank.microservice.customerservice.utility.enums.Gender;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -18,7 +19,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Customer {
+public class Customer implements Model {
     @Id
     private long customerTC;
     @Pattern(regexp = "^[a-zA-Z]+$", message = "customerName is invalid")

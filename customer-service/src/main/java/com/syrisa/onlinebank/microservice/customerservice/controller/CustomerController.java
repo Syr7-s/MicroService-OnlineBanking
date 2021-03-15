@@ -1,7 +1,7 @@
 package com.syrisa.onlinebank.microservice.customerservice.controller;
 
 import com.syrisa.onlinebank.microservice.customerservice.dto.CustomerDto;
-import com.syrisa.onlinebank.microservice.customerservice.entity.Customer;
+import com.syrisa.onlinebank.microservice.customerservice.entity.impl.Customer;
 import com.syrisa.onlinebank.microservice.customerservice.service.CustomerService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;

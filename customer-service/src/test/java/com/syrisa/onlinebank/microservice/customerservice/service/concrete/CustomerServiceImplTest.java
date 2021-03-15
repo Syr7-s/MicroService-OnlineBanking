@@ -1,6 +1,6 @@
 package com.syrisa.onlinebank.microservice.customerservice.service.concrete;
 
-import com.syrisa.onlinebank.microservice.customerservice.entity.Customer;
+import com.syrisa.onlinebank.microservice.customerservice.entity.impl.Customer;
 import com.syrisa.onlinebank.microservice.customerservice.repository.CustomerRepository;
 import com.syrisa.onlinebank.microservice.customerservice.service.impl.CustomerServiceImpl;
 import com.syrisa.onlinebank.microservice.customerservice.utility.enums.Gender;

@@ -1,7 +1,7 @@
 package com.syrisa.onlinebank.microservice.customerservice.service.impl;
 
 
-import com.syrisa.onlinebank.microservice.customerservice.entity.Customer;
+import com.syrisa.onlinebank.microservice.customerservice.entity.impl.Customer;
 import com.syrisa.onlinebank.microservice.customerservice.repository.AddressRepository;
 import com.syrisa.onlinebank.microservice.customerservice.repository.CustomerRepository;
 import com.syrisa.onlinebank.microservice.customerservice.service.CustomerService;

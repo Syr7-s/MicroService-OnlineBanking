@@ -1,7 +1,7 @@
 package com.syrisa.onlinebank.microservice.customerservice.dto;
 
-import com.syrisa.onlinebank.microservice.customerservice.entity.Address;
-import com.syrisa.onlinebank.microservice.customerservice.entity.Customer;
+import com.syrisa.onlinebank.microservice.customerservice.entity.impl.Address;
+import com.syrisa.onlinebank.microservice.customerservice.entity.impl.Customer;
 import com.syrisa.onlinebank.microservice.customerservice.utility.enums.Gender;
 import lombok.Builder;
 import lombok.Data;
