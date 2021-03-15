@@ -1,7 +1,7 @@
 package com.syrisa.onlinebank.microservice.accountservice.controller;
 
 import com.syrisa.onlinebank.microservice.accountservice.dto.DemandDepositAccountDto;
-import com.syrisa.onlinebank.microservice.accountservice.entity.DemandDepositAccount;
+import com.syrisa.onlinebank.microservice.accountservice.entity.impl.DemandDepositAccount;
 import com.syrisa.onlinebank.microservice.accountservice.service.DemandDepositAccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +22,21 @@ public class DemandDepositAccountController {
     @PostMapping("/demand")
     @ResponseStatus(HttpStatus.CREATED)
     public DemandDepositAccountDto create(@RequestBody DemandDepositAccountDto demandDepositAccountDto) {
-        return demandDepositAccountService.create(demandDepositAccountDto.toDemandDepositAccount()).toDemandDepositAccountDto();
+        try{
+            return demandDepositAccountService.create(demandDepositAccountDto.toDemandDepositAccount()).toDemandDepositAccountDto();
+        }catch (Exception exception){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
     }
 
     @PutMapping("/demand")
     @ResponseStatus(HttpStatus.CREATED)
     public DemandDepositAccountDto update(@RequestBody DemandDepositAccountDto demandDepositAccountDto) {
-        return demandDepositAccountService.update(demandDepositAccountDto.toDemandDepositAccount()).toDemandDepositAccountDto();
+        try {
+            return demandDepositAccountService.update(demandDepositAccountDto.toDemandDepositAccount()).toDemandDepositAccountDto();
+        }catch (Exception exception){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,exception.getMessage());
+        }
     }
 
     @GetMapping("/demand/accountNumber/{accountNumber}")

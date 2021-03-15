@@ -1,6 +1,7 @@
-package com.syrisa.onlinebank.microservice.accountservice.entity;
+package com.syrisa.onlinebank.microservice.accountservice.entity.impl;
 
 import com.syrisa.onlinebank.microservice.accountservice.dto.ExtractOfAccountDto;
+import com.syrisa.onlinebank.microservice.accountservice.entity.Entity;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Document
-public class ExtractOfAccount {
+public class ExtractOfAccount implements Entity {
     @Id
     private UUID id;
     private long accountNumber;

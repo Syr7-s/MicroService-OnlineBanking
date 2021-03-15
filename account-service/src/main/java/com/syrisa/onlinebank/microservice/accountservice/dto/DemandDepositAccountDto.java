@@ -1,7 +1,7 @@
 package com.syrisa.onlinebank.microservice.accountservice.dto;
 
 
-import com.syrisa.onlinebank.microservice.accountservice.entity.DemandDepositAccount;
+import com.syrisa.onlinebank.microservice.accountservice.entity.impl.DemandDepositAccount;
 import com.syrisa.onlinebank.microservice.accountservice.utility.currency.Currency;
 import lombok.Builder;
 import lombok.Data;

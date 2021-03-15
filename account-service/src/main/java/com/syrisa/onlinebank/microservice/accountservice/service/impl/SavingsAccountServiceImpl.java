@@ -1,7 +1,7 @@
 package com.syrisa.onlinebank.microservice.accountservice.service.impl;
 
-import com.syrisa.onlinebank.microservice.accountservice.entity.ExtractOfAccount;
-import com.syrisa.onlinebank.microservice.accountservice.entity.SavingsAccount;
+import com.syrisa.onlinebank.microservice.accountservice.entity.impl.ExtractOfAccount;
+import com.syrisa.onlinebank.microservice.accountservice.entity.impl.SavingsAccount;
 import com.syrisa.onlinebank.microservice.accountservice.repository.SavingsAccountRepository;
 import com.syrisa.onlinebank.microservice.accountservice.service.DepositAndWithdrawMoneyService;
 import com.syrisa.onlinebank.microservice.accountservice.service.ExtractOfAccountService;
@@ -17,7 +17,8 @@ import java.util.List;
 
 
 @Service
-public class SavingsAccountServiceImpl implements SavingsAccountService, DepositAndWithdrawMoneyService<SavingsAccount, ExtractOfAccount> {
+public class SavingsAccountServiceImpl implements SavingsAccountService,
+        DepositAndWithdrawMoneyService<SavingsAccount, ExtractOfAccount> {
     private final SavingsAccountRepository savingsAccountRepository;
     private final ExtractOfAccountService<ExtractOfAccount> extractOfAccountService;
 

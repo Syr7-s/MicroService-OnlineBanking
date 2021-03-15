@@ -1,7 +1,7 @@
 package com.syrisa.onlinebank.microservice.accountservice.service.impl;
 
-import com.syrisa.onlinebank.microservice.accountservice.entity.DemandDepositAccount;
-import com.syrisa.onlinebank.microservice.accountservice.entity.ExtractOfAccount;
+import com.syrisa.onlinebank.microservice.accountservice.entity.impl.DemandDepositAccount;
+import com.syrisa.onlinebank.microservice.accountservice.entity.impl.ExtractOfAccount;
 import com.syrisa.onlinebank.microservice.accountservice.repository.DemandDepositAccountRepository;
 import com.syrisa.onlinebank.microservice.accountservice.service.DemandDepositAccountService;
 import com.syrisa.onlinebank.microservice.accountservice.service.DepositAndWithdrawMoneyService;
@@ -16,7 +16,8 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
-public class DemandDepositAccountServiceImpl implements DemandDepositAccountService, DepositAndWithdrawMoneyService<DemandDepositAccount, ExtractOfAccount> {
+public class DemandDepositAccountServiceImpl implements DemandDepositAccountService,
+        DepositAndWithdrawMoneyService<DemandDepositAccount, ExtractOfAccount> {
     private final DemandDepositAccountRepository demandDepositAccountRepository;
     private final ExtractOfAccountService<ExtractOfAccount> extractOfAccountService;
 
@@ -27,19 +28,28 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
 
     @Override
     public DemandDepositAccount create(DemandDepositAccount demandDepositAccount) {
-        String accountNumber = Account.generateAccount.get();
-        demandDepositAccount.setAccountNumber(Long.parseLong(accountNumber));
-        demandDepositAccount.setAccountIban(Iban.generateIban.apply(accountNumber));
-        return demandDepositAccountRepository.save(demandDepositAccount);
+        try{
+            String accountNumber = Account.generateAccount.get();
+            demandDepositAccount.setAccountNumber(Long.parseLong(accountNumber));
+            demandDepositAccount.setAccountIban(Iban.generateIban.apply(accountNumber));
+            return demandDepositAccountRepository.save(demandDepositAccount);
+        }catch (Exception exception){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Server error");
+        }
+
     }
 
     @Override
     public DemandDepositAccount update(DemandDepositAccount demandDepositAccount) {
-        if (get(demandDepositAccount.getAccountNumber()) != null) {
-            return demandDepositAccountRepository.save(demandDepositAccount);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found");
-        }
+      try{
+          if (get(demandDepositAccount.getAccountNumber()) != null) {
+              return demandDepositAccountRepository.save(demandDepositAccount);
+          } else {
+              throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found");
+          }
+      }catch (Exception exception){
+          throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Server Error.");
+      }
     }
 
     @Override

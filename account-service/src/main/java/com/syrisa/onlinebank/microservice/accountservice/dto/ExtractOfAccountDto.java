@@ -1,10 +1,8 @@
 package com.syrisa.onlinebank.microservice.accountservice.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.syrisa.onlinebank.microservice.accountservice.entity.ExtractOfAccount;
+import com.syrisa.onlinebank.microservice.accountservice.entity.impl.ExtractOfAccount;
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

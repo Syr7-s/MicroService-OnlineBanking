@@ -1,7 +1,7 @@
 package com.syrisa.onlinebank.microservice.accountservice.controller;
 
 import com.syrisa.onlinebank.microservice.accountservice.dto.SavingsAccountDto;
-import com.syrisa.onlinebank.microservice.accountservice.entity.SavingsAccount;
+import com.syrisa.onlinebank.microservice.accountservice.entity.impl.SavingsAccount;
 import com.syrisa.onlinebank.microservice.accountservice.service.SavingsAccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

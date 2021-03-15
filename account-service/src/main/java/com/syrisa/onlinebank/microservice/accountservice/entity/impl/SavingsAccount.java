@@ -1,7 +1,8 @@
-package com.syrisa.onlinebank.microservice.accountservice.entity;
+package com.syrisa.onlinebank.microservice.accountservice.entity.impl;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.syrisa.onlinebank.microservice.accountservice.dto.SavingsAccountDto;
+import com.syrisa.onlinebank.microservice.accountservice.entity.Entity;
 import com.syrisa.onlinebank.microservice.accountservice.utility.currency.Currency;
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -15,7 +16,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Document
-public class SavingsAccount {
+public class SavingsAccount implements Entity {
     @Id
     private long accountNumber;
     private String accountIban;
