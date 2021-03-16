@@ -33,15 +33,19 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
 
     @Override
     public DemandDepositAccount depositMoneyAccount(ExtractOfAccount extractOfAccount) {
-       try{
-           return accountProcessClient.depositMoneyDemand(extractOfAccount.toExtractOfAccountDto()).toDemandDepositAccount();
-       }catch (Exception exception){
-           throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,exception.getMessage());
-       }
+        try {
+            return accountProcessClient.depositMoneyDemand(extractOfAccount.toExtractOfAccountDto()).toDemandDepositAccount();
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
     }
 
     @Override
     public DemandDepositAccount withDrawMoneyAccount(ExtractOfAccount extractOfAccount) {
-        return null;
+        try {
+            return accountProcessClient.withDrawMoneyDemand(extractOfAccount.toExtractOfAccountDto()).toDemandDepositAccount();
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
     }
 }
