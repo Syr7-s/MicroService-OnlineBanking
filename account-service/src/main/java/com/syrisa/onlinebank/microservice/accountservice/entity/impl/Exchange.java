@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Builder
 @Document
-public class Transfer {
+public class Exchange {
     @MongoId
     private long fromAccountIban;
     private long toAccountIban;
