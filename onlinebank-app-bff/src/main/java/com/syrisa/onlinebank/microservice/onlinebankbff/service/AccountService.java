@@ -1,5 +1,7 @@
 package com.syrisa.onlinebank.microservice.onlinebankbff.service;
 
-public interface AccountService<T> {
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.Entity;
+
+public interface AccountService<T extends Entity> {
     T getAccountByIban(String accountIban);
 }
