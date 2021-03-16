@@ -6,12 +6,14 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.UUID;
 
 @Data
 @Builder
 public class ExchangeDto {
-    private long fromAccountIban;
-    private long toAccountIban;
+    private UUID processNumber;
+    private String fromAccountIban;
+    private String toAccountIban;
     private int depositMoney;
     private int receiveMoney;
     private String processType;
@@ -20,6 +22,7 @@ public class ExchangeDto {
 
     public Exchange toExchange(){
         return Exchange.builder()
+                .processNumber(this.processNumber)
                 .fromAccountIban(this.fromAccountIban)
                 .toAccountIban(this.toAccountIban)
                 .depositMoney(this.depositMoney)

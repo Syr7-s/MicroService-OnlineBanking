@@ -3,11 +3,14 @@ package com.syrisa.onlinebank.microservice.accountservice.entity.impl;
 import com.syrisa.onlinebank.microservice.accountservice.dto.ExchangeDto;
 import com.syrisa.onlinebank.microservice.accountservice.entity.Entity;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.UUID;
 
 
 @Getter
@@ -17,9 +20,10 @@ import java.time.LocalTime;
 @Builder
 @Document
 public class Exchange implements Entity {
-    @MongoId
-    private long fromAccountIban;
-    private long toAccountIban;
+    @Id
+    private UUID processNumber;
+    private String fromAccountIban;
+    private String toAccountIban;
     private int depositMoney;
     private int receiveMoney;
     private String processType;
@@ -28,6 +32,7 @@ public class Exchange implements Entity {
 
     public ExchangeDto toExchangeDto(){
         return ExchangeDto.builder()
+                .processNumber(this.processNumber)
                 .fromAccountIban(this.fromAccountIban)
                 .toAccountIban(this.toAccountIban)
                 .depositMoney(this.depositMoney)

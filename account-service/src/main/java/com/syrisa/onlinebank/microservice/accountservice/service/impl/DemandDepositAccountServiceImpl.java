@@ -1,11 +1,11 @@
 package com.syrisa.onlinebank.microservice.accountservice.service.impl;
 
 import com.syrisa.onlinebank.microservice.accountservice.entity.impl.DemandDepositAccount;
+import com.syrisa.onlinebank.microservice.accountservice.entity.impl.Exchange;
 import com.syrisa.onlinebank.microservice.accountservice.entity.impl.ExtractOfAccount;
+import com.syrisa.onlinebank.microservice.accountservice.entity.impl.SavingsAccount;
 import com.syrisa.onlinebank.microservice.accountservice.repository.DemandDepositAccountRepository;
-import com.syrisa.onlinebank.microservice.accountservice.service.DemandDepositAccountService;
-import com.syrisa.onlinebank.microservice.accountservice.service.DepositAndWithdrawMoneyService;
-import com.syrisa.onlinebank.microservice.accountservice.service.ExtractOfAccountService;
+import com.syrisa.onlinebank.microservice.accountservice.service.*;
 import com.syrisa.onlinebank.microservice.accountservice.utility.generate.account.Account;
 import com.syrisa.onlinebank.microservice.accountservice.utility.generate.iban.Iban;
 import org.springframework.data.domain.Page;
@@ -23,10 +23,14 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
         DepositAndWithdrawMoneyService<DemandDepositAccount, ExtractOfAccount> {
     private final DemandDepositAccountRepository demandDepositAccountRepository;
     private final ExtractOfAccountService<ExtractOfAccount> extractOfAccountService;
+    private final ExchangeService<Exchange> exchangeService;
+    private final SavingsAccountService savingsAccountService;
 
-    public DemandDepositAccountServiceImpl(DemandDepositAccountRepository demandDepositAccountRepository, ExtractOfAccountService<ExtractOfAccount> extractOfAccountService) {
+    public DemandDepositAccountServiceImpl(DemandDepositAccountRepository demandDepositAccountRepository, ExtractOfAccountService<ExtractOfAccount> extractOfAccountService, ExchangeService<Exchange> exchangeService, SavingsAccountService savingsAccountService) {
         this.demandDepositAccountRepository = demandDepositAccountRepository;
         this.extractOfAccountService = extractOfAccountService;
+        this.exchangeService = exchangeService;
+        this.savingsAccountService = savingsAccountService;
     }
 
     @Override
@@ -68,6 +72,7 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account is not found.");
         }
     }
+
     @Override
     public Page<DemandDepositAccount> getAccounts(Pageable pageable) {
         return demandDepositAccountRepository.findAllBy(pageable);
@@ -128,6 +133,46 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
         try {
             extractOfAccount.setAccountType("Demand Deposit Account");
             extractOfAccount.setAccountProcess(accountProcess);
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
+
+    @Override
+    public DemandDepositAccount transferMoneyBetweenAccounts(Exchange exchange) {
+        try {
+            DemandDepositAccount from = getAccountByIBAN(exchange.getFromAccountIban());
+            DemandDepositAccount to = getAccountByIBAN(exchange.getToAccountIban());
+            if (from.getAccountBalance() - exchange.getDepositMoney() > 0) {
+                from.setAccountBalance(from.getAccountBalance() - exchange.getDepositMoney());
+                to.setAccountBalance(to.getAccountBalance() + exchange.getReceiveMoney());
+                exchange.setProcessType("Transfer between accounts.");
+                exchangeService.createExchange(exchange);
+                demandDepositAccountRepository.save(from);
+                return demandDepositAccountRepository.save(to);
+            } else {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Not enough money in your account");
+            }
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
+
+    @Override
+    public DemandDepositAccount transferMoneyDifferentAccounts(Exchange exchange) {
+        try {
+            DemandDepositAccount from = getAccountByIBAN(exchange.getFromAccountIban());
+            SavingsAccount to = savingsAccountService.getAccountByIBAN(exchange.getToAccountIban());
+            if (from.getAccountBalance() - exchange.getDepositMoney() > 0) {
+                from.setAccountBalance(from.getAccountBalance() - exchange.getDepositMoney());
+                to.setAccountBalance(to.getAccountBalance() + exchange.getReceiveMoney());
+                exchange.setProcessType("Transfer between different accounts.");
+                exchangeService.createExchange(exchange);
+                savingsAccountService.update(to);
+                return demandDepositAccountRepository.save(from);
+            } else {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Not enough money in your account");
+            }
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
