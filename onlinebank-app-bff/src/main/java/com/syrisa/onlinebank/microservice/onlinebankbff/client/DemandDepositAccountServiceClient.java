@@ -3,7 +3,6 @@ package com.syrisa.onlinebank.microservice.onlinebankbff.client;
 import com.syrisa.onlinebank.microservice.onlinebankbff.dto.DemandDepositAccountDto;
 import com.syrisa.onlinebank.microservice.onlinebankbff.dto.ExtractOfAccountDto;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
