@@ -1,6 +1,7 @@
-package com.syrisa.onlinebank.microservice.onlinebankbff.entity;
+package com.syrisa.onlinebank.microservice.onlinebankbff.entity.impl;
 
 import com.syrisa.onlinebank.microservice.onlinebankbff.dto.DemandDepositAccountDto;
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.Entity;
 import com.syrisa.onlinebank.microservice.onlinebankbff.utility.enums.currency.Currency;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DemandDepositAccount {
+public class DemandDepositAccount implements Entity {
     private long accountNumber;
     private String accountIban;
     private int accountBalance;

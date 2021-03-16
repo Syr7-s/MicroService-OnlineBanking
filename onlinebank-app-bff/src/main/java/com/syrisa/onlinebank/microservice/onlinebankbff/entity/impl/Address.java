@@ -1,5 +1,6 @@
-package com.syrisa.onlinebank.microservice.onlinebankbff.entity;
+package com.syrisa.onlinebank.microservice.onlinebankbff.entity.impl;
 
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.Entity;
 import lombok.*;
 
 @Getter
@@ -7,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Address {
+public class Address implements Entity {
     private int id;
     private String country;
     private String city;

@@ -1,6 +1,7 @@
-package com.syrisa.onlinebank.microservice.onlinebankbff.entity;
+package com.syrisa.onlinebank.microservice.onlinebankbff.entity.impl;
 
 import com.syrisa.onlinebank.microservice.onlinebankbff.dto.ExtractOfAccountDto;
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.Entity;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ExtractOfAccount {
+public class ExtractOfAccount implements Entity {
     private UUID id;
     private long accountNumber;
     private int money;

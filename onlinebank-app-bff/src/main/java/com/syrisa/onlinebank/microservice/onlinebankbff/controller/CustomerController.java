@@ -1,7 +1,7 @@
 package com.syrisa.onlinebank.microservice.onlinebankbff.controller;
 
 import com.syrisa.onlinebank.microservice.onlinebankbff.dto.CustomerDto;
-import com.syrisa.onlinebank.microservice.onlinebankbff.entity.Customer;
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.impl.Customer;
 import com.syrisa.onlinebank.microservice.onlinebankbff.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

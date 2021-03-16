@@ -6,7 +6,7 @@ import com.syrisa.onlinebank.microservice.onlinebankbff.client.SavingsAccountSer
 import com.syrisa.onlinebank.microservice.onlinebankbff.dto.CustomerDto;
 import com.syrisa.onlinebank.microservice.onlinebankbff.dto.DemandDepositAccountDto;
 import com.syrisa.onlinebank.microservice.onlinebankbff.dto.SavingsAccountDto;
-import com.syrisa.onlinebank.microservice.onlinebankbff.entity.Customer;
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.impl.Customer;
 import com.syrisa.onlinebank.microservice.onlinebankbff.service.CustomerService;
 import org.springframework.stereotype.Service;
 

@@ -1,12 +1,10 @@
 package com.syrisa.onlinebank.microservice.onlinebankbff.controller;
 
 import com.syrisa.onlinebank.microservice.onlinebankbff.dto.DemandDepositAccountDto;
+import com.syrisa.onlinebank.microservice.onlinebankbff.dto.ExtractOfAccountDto;
 import com.syrisa.onlinebank.microservice.onlinebankbff.service.DemandDepositAccountService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController

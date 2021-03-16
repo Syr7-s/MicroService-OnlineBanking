@@ -1,7 +1,7 @@
 package com.syrisa.onlinebank.microservice.onlinebankbff.service.impl;
 
 import com.syrisa.onlinebank.microservice.onlinebankbff.client.SavingsAccountServiceClient;
-import com.syrisa.onlinebank.microservice.onlinebankbff.entity.SavingsAccount;
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.impl.SavingsAccount;
 import com.syrisa.onlinebank.microservice.onlinebankbff.service.SavingsAccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

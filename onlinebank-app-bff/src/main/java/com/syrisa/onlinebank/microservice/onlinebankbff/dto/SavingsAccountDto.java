@@ -1,6 +1,6 @@
 package com.syrisa.onlinebank.microservice.onlinebankbff.dto;
 
-import com.syrisa.onlinebank.microservice.onlinebankbff.entity.SavingsAccount;
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.impl.SavingsAccount;
 import com.syrisa.onlinebank.microservice.onlinebankbff.utility.enums.currency.Currency;
 import lombok.Builder;
 import lombok.Data;

@@ -15,6 +15,6 @@ public interface DemandDepositAccountServiceClient {
     @GetMapping("/api/v1/demand/iban/{accountIban}")
     DemandDepositAccountDto getDemandDepositAccountByAccountIban(@PathVariable("accountIban") String accountIban);
 
-    @PostMapping("/api/v1/demand/depositMoney")
-    DemandDepositAccountDto depositMoneyDemand(@RequestBody ExtractOfAccountDto extractOfAccountDto);
+   /* @PostMapping("/api/v1/demand/depositMoney")
+    DemandDepositAccountDto depositMoneyDemand(@RequestBody ExtractOfAccountDto extractOfAccountDto);*/
 }

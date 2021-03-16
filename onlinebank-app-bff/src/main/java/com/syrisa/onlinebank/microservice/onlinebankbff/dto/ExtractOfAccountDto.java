@@ -1,6 +1,6 @@
 package com.syrisa.onlinebank.microservice.onlinebankbff.dto;
 
-import com.syrisa.onlinebank.microservice.onlinebankbff.entity.ExtractOfAccount;
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.impl.ExtractOfAccount;
 import lombok.Builder;
 import lombok.Data;
 

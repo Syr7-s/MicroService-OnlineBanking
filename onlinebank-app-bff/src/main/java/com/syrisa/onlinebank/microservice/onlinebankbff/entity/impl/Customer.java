@@ -1,6 +1,7 @@
-package com.syrisa.onlinebank.microservice.onlinebankbff.entity;
+package com.syrisa.onlinebank.microservice.onlinebankbff.entity.impl;
 
 import com.syrisa.onlinebank.microservice.onlinebankbff.dto.CustomerDto;
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.Entity;
 import com.syrisa.onlinebank.microservice.onlinebankbff.utility.enums.gender.Gender;
 import lombok.*;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Customer {
+public class Customer implements Entity {
     private long customerTC;
     private String customerName;
     private String customerLastname;

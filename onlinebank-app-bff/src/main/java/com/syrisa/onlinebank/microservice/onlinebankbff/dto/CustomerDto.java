@@ -1,9 +1,9 @@
 package com.syrisa.onlinebank.microservice.onlinebankbff.dto;
 
-import com.syrisa.onlinebank.microservice.onlinebankbff.entity.Address;
-import com.syrisa.onlinebank.microservice.onlinebankbff.entity.Customer;
-import com.syrisa.onlinebank.microservice.onlinebankbff.entity.DemandDepositAccount;
-import com.syrisa.onlinebank.microservice.onlinebankbff.entity.SavingsAccount;
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.impl.Address;
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.impl.Customer;
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.impl.DemandDepositAccount;
+import com.syrisa.onlinebank.microservice.onlinebankbff.entity.impl.SavingsAccount;
 import com.syrisa.onlinebank.microservice.onlinebankbff.utility.enums.gender.Gender;
 import lombok.Builder;
 import lombok.Data;
