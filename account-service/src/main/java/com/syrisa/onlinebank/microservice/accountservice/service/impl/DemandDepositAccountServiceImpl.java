@@ -28,28 +28,28 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
 
     @Override
     public DemandDepositAccount create(DemandDepositAccount demandDepositAccount) {
-        try{
+        try {
             String accountNumber = Account.generateAccount.get();
             demandDepositAccount.setAccountNumber(Long.parseLong(accountNumber));
             demandDepositAccount.setAccountIban(Iban.generateIban.apply(accountNumber));
             return demandDepositAccountRepository.save(demandDepositAccount);
-        }catch (Exception exception){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Server error");
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Server error");
         }
 
     }
 
     @Override
     public DemandDepositAccount update(DemandDepositAccount demandDepositAccount) {
-      try{
-          if (get(demandDepositAccount.getAccountNumber()) != null) {
-              return demandDepositAccountRepository.save(demandDepositAccount);
-          } else {
-              throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found");
-          }
-      }catch (Exception exception){
-          throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Server Error.");
-      }
+        try {
+            if (get(demandDepositAccount.getAccountNumber()) != null) {
+                return demandDepositAccountRepository.save(demandDepositAccount);
+            } else {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found");
+            }
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error.");
+        }
     }
 
     @Override
@@ -94,6 +94,7 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
         try {
             DemandDepositAccount demandDepositAccount = get(extractOfAccount.getAccountNumber());
             demandDepositAccount.setAccountBalance(demandDepositAccount.getAccountBalance() + extractOfAccount.getMoney());
+            addAccountTypeAndAccountProcess("Deposit money", extractOfAccount);
             extractOfAccountService.create(extractOfAccount);
             return update(demandDepositAccount);
         } catch (Exception exception) {
@@ -108,6 +109,7 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
             DemandDepositAccount demandDepositAccount = get(extractOfAccount.getAccountNumber());
             if (demandDepositAccount.getAccountBalance() - extractOfAccount.getMoney() > 0) {
                 demandDepositAccount.setAccountBalance(demandDepositAccount.getAccountBalance() - extractOfAccount.getMoney());
+                addAccountTypeAndAccountProcess("With Draw money", extractOfAccount);
                 extractOfAccountService.create(extractOfAccount);
                 return update(demandDepositAccount);
             } else {
@@ -118,4 +120,12 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
         }
     }
 
+    private void addAccountTypeAndAccountProcess(String accountProcess, ExtractOfAccount extractOfAccount) {
+        try {
+            extractOfAccount.setAccountType("Demand Deposit Account");
+            extractOfAccount.setAccountProcess(accountProcess);
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
 }

@@ -96,6 +96,7 @@ public class SavingsAccountServiceImpl implements SavingsAccountService,
         try {
             SavingsAccount savingsAccount = get(extractOfAccount.getAccountNumber());
             savingsAccount.setAccountBalance(savingsAccount.getAccountBalance() + extractOfAccount.getMoney());
+            addAccountTypeAndAccountProcess("Deposit Money",extractOfAccount);
             extractOfAccountService.create(extractOfAccount);
             return update(savingsAccount);
         } catch (Exception exception) {
@@ -110,11 +111,21 @@ public class SavingsAccountServiceImpl implements SavingsAccountService,
             SavingsAccount savingsAccount = get(extractOfAccount.getAccountNumber());
             if (savingsAccount.getAccountBalance() - extractOfAccount.getMoney() > 0) {
                 savingsAccount.setAccountBalance(savingsAccount.getAccountBalance() - extractOfAccount.getMoney());
+                addAccountTypeAndAccountProcess("With Draw Money",extractOfAccount);
                 extractOfAccountService.create(extractOfAccount);
                 return update(savingsAccount);
             } else {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Not enough money.");
             }
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
+
+    private void addAccountTypeAndAccountProcess(String accountProcess, ExtractOfAccount extractOfAccount) {
+        try {
+            extractOfAccount.setAccountType("Savings Account");
+            extractOfAccount.setAccountProcess(accountProcess);
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
