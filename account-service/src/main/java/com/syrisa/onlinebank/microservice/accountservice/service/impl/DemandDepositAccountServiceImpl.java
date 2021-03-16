@@ -68,7 +68,6 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account is not found.");
         }
     }
-
     @Override
     public Page<DemandDepositAccount> getAccounts(Pageable pageable) {
         return demandDepositAccountRepository.findAllBy(pageable);
