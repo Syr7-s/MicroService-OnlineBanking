@@ -34,6 +34,16 @@ public class AccountProcessController {
         }
     }
 
+    @PostMapping("/demand/withDrawMoney")
+    @ResponseStatus(HttpStatus.CREATED)
+    public DemandDepositAccountDto withDrawMoneyDemand(@RequestBody ExtractOfAccountDto extractOfAccountDto) {
+        try {
+            return demandDeposit.withDrawMoneyAccount(extractOfAccountDto.toExtractOfAccount()).toDemandDepositAccountDto();
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
+
     @GetMapping("/account/process")
     public List<ExtractOfAccountDto> getAllProcess() {
         try {
