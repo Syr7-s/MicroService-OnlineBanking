@@ -1,6 +1,7 @@
 package com.syrisa.onlinebank.microservice.accountservice.entity.impl;
 
 import com.syrisa.onlinebank.microservice.accountservice.dto.ExchangeDto;
+import com.syrisa.onlinebank.microservice.accountservice.entity.Entity;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -15,7 +16,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Builder
 @Document
-public class Exchange {
+public class Exchange implements Entity {
     @MongoId
     private long fromAccountIban;
     private long toAccountIban;
