@@ -8,6 +8,8 @@ import com.syrisa.onlinebank.microservice.accountservice.service.ExtractOfAccoun
 import com.syrisa.onlinebank.microservice.accountservice.service.SavingsAccountService;
 import com.syrisa.onlinebank.microservice.accountservice.utility.generate.account.Account;
 import com.syrisa.onlinebank.microservice.accountservice.utility.generate.iban.Iban;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,6 +72,11 @@ public class SavingsAccountServiceImpl implements SavingsAccountService,
     }
 
     @Override
+    public Page<SavingsAccount> getAccounts(Pageable pageable) {
+        return savingsAccountRepository.findAllBy(pageable);
+    }
+
+    @Override
     public List<SavingsAccount> getAccountByCustomers(long customerTC) {
         List<SavingsAccount> savingsAccounts = savingsAccountRepository.getSavingsAccountsByCustomerTC(customerTC);
         if (!savingsAccounts.isEmpty()) {
@@ -96,7 +103,7 @@ public class SavingsAccountServiceImpl implements SavingsAccountService,
         try {
             SavingsAccount savingsAccount = get(extractOfAccount.getAccountNumber());
             savingsAccount.setAccountBalance(savingsAccount.getAccountBalance() + extractOfAccount.getMoney());
-            addAccountTypeAndAccountProcess("Deposit Money",extractOfAccount);
+            addAccountTypeAndAccountProcess("Deposit Money", extractOfAccount);
             extractOfAccountService.create(extractOfAccount);
             return update(savingsAccount);
         } catch (Exception exception) {
@@ -111,7 +118,7 @@ public class SavingsAccountServiceImpl implements SavingsAccountService,
             SavingsAccount savingsAccount = get(extractOfAccount.getAccountNumber());
             if (savingsAccount.getAccountBalance() - extractOfAccount.getMoney() > 0) {
                 savingsAccount.setAccountBalance(savingsAccount.getAccountBalance() - extractOfAccount.getMoney());
-                addAccountTypeAndAccountProcess("With Draw Money",extractOfAccount);
+                addAccountTypeAndAccountProcess("With Draw Money", extractOfAccount);
                 extractOfAccountService.create(extractOfAccount);
                 return update(savingsAccount);
             } else {

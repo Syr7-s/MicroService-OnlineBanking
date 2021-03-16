@@ -2,6 +2,8 @@ package com.syrisa.onlinebank.microservice.accountservice.repository;
 
 
 import com.syrisa.onlinebank.microservice.accountservice.entity.impl.DemandDepositAccount;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +14,6 @@ public interface DemandDepositAccountRepository extends MongoRepository<DemandDe
     DemandDepositAccount getDemandDepositAccountsByAccountIban(String iban);
 
     List<DemandDepositAccount> getDemandDepositAccountsByCustomerTC(long customerTC);
+
+    Page<DemandDepositAccount> findAllBy(Pageable pageable);
 }

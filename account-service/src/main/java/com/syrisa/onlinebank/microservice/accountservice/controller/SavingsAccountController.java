@@ -3,10 +3,12 @@ package com.syrisa.onlinebank.microservice.accountservice.controller;
 import com.syrisa.onlinebank.microservice.accountservice.dto.SavingsAccountDto;
 import com.syrisa.onlinebank.microservice.accountservice.entity.impl.SavingsAccount;
 import com.syrisa.onlinebank.microservice.accountservice.service.SavingsAccountService;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -67,6 +69,18 @@ public class SavingsAccountController {
                     .collect(Collectors.toList());
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/savings/all", params = {"page", "size"})
+    public List<SavingsAccountDto> getAccounts(@Min(value = 0) @RequestParam int page, @Min(value = 1) @RequestParam int size) {
+        try {
+            return savingsAccountService.getAccounts(PageRequest.of(page, size))
+                    .stream()
+                    .map(SavingsAccount::toSavingsAccountDto)
+                    .collect(Collectors.toList());
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
     }
 

@@ -8,6 +8,8 @@ import com.syrisa.onlinebank.microservice.accountservice.service.DepositAndWithd
 import com.syrisa.onlinebank.microservice.accountservice.service.ExtractOfAccountService;
 import com.syrisa.onlinebank.microservice.accountservice.utility.generate.account.Account;
 import com.syrisa.onlinebank.microservice.accountservice.utility.generate.iban.Iban;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+@Transactional
 @Service
 public class DemandDepositAccountServiceImpl implements DemandDepositAccountService,
         DepositAndWithdrawMoneyService<DemandDepositAccount, ExtractOfAccount> {
@@ -36,7 +39,6 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Server error");
         }
-
     }
 
     @Override
@@ -68,6 +70,11 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
     }
 
     @Override
+    public Page<DemandDepositAccount> getAccounts(Pageable pageable) {
+        return demandDepositAccountRepository.findAllBy(pageable);
+    }
+
+    @Override
     public List<DemandDepositAccount> getAccountByCustomers(long customerTC) {
         List<DemandDepositAccount> demandDepositAccounts = demandDepositAccountRepository.getDemandDepositAccountsByCustomerTC(customerTC);
         if (!demandDepositAccounts.isEmpty()) {
@@ -88,7 +95,6 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
         }
     }
 
-    @Transactional
     @Override
     public DemandDepositAccount depositMoneyAccount(ExtractOfAccount extractOfAccount) {
         try {
@@ -102,7 +108,6 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
         }
     }
 
-    @Transactional
     @Override
     public DemandDepositAccount withDrawMoneyAccount(ExtractOfAccount extractOfAccount) {
         try {

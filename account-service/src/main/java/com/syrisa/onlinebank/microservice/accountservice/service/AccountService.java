@@ -2,6 +2,8 @@ package com.syrisa.onlinebank.microservice.accountservice.service;
 
 
 import com.syrisa.onlinebank.microservice.accountservice.entity.Entity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 public interface AccountService<T extends Entity> {
@@ -12,6 +14,8 @@ public interface AccountService<T extends Entity> {
     T get(long accountNumber);
 
     T getAccountByIBAN(String accountIBAN);
+
+    Page<T> getAccounts(Pageable pageable);
 
     List<T> getAccountByCustomers(long customerTC);
 
