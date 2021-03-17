@@ -1,5 +1,6 @@
 package com.syrisa.onlinebank.microservice.onlinebankbff.entity.impl;
 
+import com.syrisa.onlinebank.microservice.onlinebankbff.dto.ExchangeDto;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -21,4 +22,17 @@ public class Exchange {
     private String processType;
     private LocalTime time;
     private LocalDate date;
+
+    public ExchangeDto toExchangeDto() {
+        return ExchangeDto.builder()
+                .processNumber(this.processNumber)
+                .fromAccountIban(this.fromAccountIban)
+                .toAccountIban(this.toAccountIban)
+                .depositMoney(this.depositMoney)
+                .receiveMoney(this.receiveMoney)
+                .processType(this.processType)
+                .time(this.time)
+                .date(this.date)
+                .build();
+    }
 }
