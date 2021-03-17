@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService<Customer> {
     public Customer get(long tc) {
         CustomerDto customerDto = customerServiceClient.get(tc);
         List<DemandDepositAccountDto> demandDepositAccounts = demandDepositAccountServiceClient.getDemandDepositAccountByCustomerTC(tc);
-        List<SavingsAccountDto> savingsAccounts = savingsAccountServiceClient.getDemandDepositAccountByCustomerTC(tc);
+        List<SavingsAccountDto> savingsAccounts = savingsAccountServiceClient.getSavingsAccountByCustomerTC(tc);
         customerDto.setDemandDepositAccounts(demandDepositAccounts.stream().map(DemandDepositAccountDto::toDemandDepositAccount).collect(Collectors.toList()));
         customerDto.setSavingsAccounts(savingsAccounts.stream().map(SavingsAccountDto::toSavingsAccount).collect(Collectors.toList()));
         return customerDto.toCustomer();

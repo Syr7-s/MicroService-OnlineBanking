@@ -24,7 +24,7 @@ public class SavingsAccountServiceImpl implements SavingsAccountService
     @Override
     public SavingsAccount getAccountByIban(String accountIban) {
         try {
-            return savingsAccountServiceClient.getDemandDepositAccountByAccountIban(accountIban).toSavingsAccount();
+            return savingsAccountServiceClient.getSavingsAccountByAccountIban(accountIban).toSavingsAccount();
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account Not found.");
         }
