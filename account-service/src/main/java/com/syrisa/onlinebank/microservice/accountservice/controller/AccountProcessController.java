@@ -74,7 +74,7 @@ public class AccountProcessController {
         }
     }
 
-    @PostMapping("/demand/transfer/betweenAccount")
+  /*  @PostMapping("/demand/transfer/betweenAccount")
     public DemandDepositAccountDto moneyTransferBetweenAccounts(@RequestBody ExchangeDto exchangeDto) {
         try {
             return demandDepositAccountService.transferMoneyBetweenAccounts(exchangeDto.toExchange()).toDemandDepositAccountDto();
@@ -91,7 +91,7 @@ public class AccountProcessController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
     }
-
+*/
     @GetMapping("/account/process")
     public List<ExtractOfAccountDto> getAllProcess() {
         return extractOfAccountService.getAllProcess()

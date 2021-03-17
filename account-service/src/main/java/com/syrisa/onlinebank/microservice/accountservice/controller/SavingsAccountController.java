@@ -52,7 +52,7 @@ public class SavingsAccountController {
     }
 
     @GetMapping("/savings/iban/{accountIban}")
-    public SavingsAccountDto getDemandDepositAccountByAccountIban(@PathVariable("accountIban") String accountIban) {
+    public SavingsAccountDto getSavingsAccountByAccountIban(@PathVariable("accountIban") String accountIban) {
         try {
             return savingsAccountService.getAccountByIBAN(accountIban).toSavingsAccountDto();
         } catch (Exception exception) {
@@ -61,7 +61,7 @@ public class SavingsAccountController {
     }
 
     @GetMapping("/savings/{customerTC}")
-    public List<SavingsAccountDto> getDemandDepositAccountByCustomerTC(@PathVariable("customerTC") long customerTC) {
+    public List<SavingsAccountDto> getSavingsAccountByCustomerTC(@PathVariable("customerTC") long customerTC) {
         try {
             return savingsAccountService.getAccountByCustomers(customerTC)
                     .stream()
