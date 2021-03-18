@@ -2,6 +2,7 @@ package com.onlinebank.microservice.cardservice.entity.impl;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.onlinebank.microservice.cardservice.dto.CreditCardDto;
 import com.onlinebank.microservice.cardservice.utility.currency.Currency;
 import lombok.*;
 
@@ -27,6 +28,19 @@ public class CreditCard {
     private int cardDebt;
     @Enumerated(EnumType.STRING)
     private Currency currency;
+
+    public CreditCardDto toCreditCardDto(){
+        return CreditCardDto.builder()
+                .cardAccountNumber(this.cardAccountNumber)
+                .cardNameSurname(this.cardNameSurname)
+                .cardPassword(this.cardPassword)
+                .expirationDate(this.expirationDate)
+                .securityCode(this.securityCode)
+                .cardLimit(this.cardLimit)
+                .cardDebt(this.cardDebt)
+                .currency(this.currency)
+                .build();
+    }
 
 
 }
