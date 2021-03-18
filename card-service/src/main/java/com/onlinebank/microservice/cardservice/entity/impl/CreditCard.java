@@ -1,4 +1,6 @@
 package com.onlinebank.microservice.cardservice.entity.impl;
 
-public class CreditCard {
+import com.onlinebank.microservice.cardservice.entity.Entity;
+
+public class CreditCard implements Entity {
 }
