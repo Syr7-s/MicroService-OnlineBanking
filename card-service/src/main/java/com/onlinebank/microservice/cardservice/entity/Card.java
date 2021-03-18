@@ -1,4 +1,4 @@
 package com.onlinebank.microservice.cardservice.entity;
 
-public interface Entity {
+public interface Card {
 }
