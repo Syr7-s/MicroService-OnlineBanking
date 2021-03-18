@@ -3,6 +3,7 @@ package com.onlinebank.microservice.cardservice.entity.impl;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.onlinebank.microservice.cardservice.dto.CreditCardDto;
+import com.onlinebank.microservice.cardservice.entity.Card;
 import com.onlinebank.microservice.cardservice.utility.currency.Currency;
 import lombok.*;
 
@@ -16,7 +17,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
-public class CreditCard {
+public class CreditCard implements Card {
     @Id
     private long cardAccountNumber;
     private String cardNameSurname;

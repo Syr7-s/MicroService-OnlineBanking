@@ -1,4 +1,6 @@
 package com.onlinebank.microservice.cardservice.service.abstrct;
 
-public interface CreditCardService {
+import com.onlinebank.microservice.cardservice.entity.impl.CreditCard;
+
+public interface CreditCardService extends CardService<CreditCard> {
 }
