@@ -1,8 +1,8 @@
-package com.syrisa.onlinebank.microservice.accountservice.service.impl;
+package com.syrisa.onlinebank.microservice.accountservice.service.concrete;
 
 import com.syrisa.onlinebank.microservice.accountservice.entity.impl.ExtractOfAccount;
 import com.syrisa.onlinebank.microservice.accountservice.repository.ExtractOfAccountRepository;
-import com.syrisa.onlinebank.microservice.accountservice.service.ExtractOfAccountService;
+import com.syrisa.onlinebank.microservice.accountservice.service.abstrct.ExtractOfAccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

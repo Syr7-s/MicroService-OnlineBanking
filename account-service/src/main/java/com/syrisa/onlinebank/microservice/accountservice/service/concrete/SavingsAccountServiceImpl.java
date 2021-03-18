@@ -1,11 +1,11 @@
-package com.syrisa.onlinebank.microservice.accountservice.service.impl;
+package com.syrisa.onlinebank.microservice.accountservice.service.concrete;
 
 import com.syrisa.onlinebank.microservice.accountservice.entity.impl.ExtractOfAccount;
 import com.syrisa.onlinebank.microservice.accountservice.entity.impl.SavingsAccount;
 import com.syrisa.onlinebank.microservice.accountservice.repository.SavingsAccountRepository;
-import com.syrisa.onlinebank.microservice.accountservice.service.DepositAndWithdrawMoneyService;
-import com.syrisa.onlinebank.microservice.accountservice.service.ExtractOfAccountService;
-import com.syrisa.onlinebank.microservice.accountservice.service.SavingsAccountService;
+import com.syrisa.onlinebank.microservice.accountservice.service.abstrct.DepositAndWithdrawMoneyService;
+import com.syrisa.onlinebank.microservice.accountservice.service.abstrct.ExtractOfAccountService;
+import com.syrisa.onlinebank.microservice.accountservice.service.abstrct.SavingsAccountService;
 import com.syrisa.onlinebank.microservice.accountservice.utility.generate.account.Account;
 import com.syrisa.onlinebank.microservice.accountservice.utility.generate.iban.Iban;
 import org.springframework.data.domain.Page;

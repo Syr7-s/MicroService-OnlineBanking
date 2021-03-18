@@ -1,4 +1,4 @@
-package com.syrisa.onlinebank.microservice.accountservice.service;
+package com.syrisa.onlinebank.microservice.accountservice.service.abstrct;
 
 import com.syrisa.onlinebank.microservice.accountservice.entity.impl.SavingsAccount;
 

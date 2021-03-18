@@ -2,7 +2,7 @@ package com.syrisa.onlinebank.microservice.accountservice.controller;
 
 import com.syrisa.onlinebank.microservice.accountservice.dto.DemandDepositAccountDto;
 import com.syrisa.onlinebank.microservice.accountservice.entity.impl.DemandDepositAccount;
-import com.syrisa.onlinebank.microservice.accountservice.service.DemandDepositAccountService;
+import com.syrisa.onlinebank.microservice.accountservice.service.abstrct.DemandDepositAccountService;
 import org.springframework.data.domain.PageRequest;
 
 import org.springframework.http.HttpStatus;
