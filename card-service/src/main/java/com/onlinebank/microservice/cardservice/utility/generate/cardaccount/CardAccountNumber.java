@@ -8,12 +8,12 @@ public final class CardAccountNumber {
     private CardAccountNumber() {
     }
 
-    public static final Supplier<String> generateCardAccountNumber = () -> {
+    public static final Supplier<Long> generateCardAccountNumber = () -> {
         StringBuilder cardAccountNumber = new StringBuilder();
         cardAccountNumber.append("85");
         for (int i = 0; i < 14; i++) {
             cardAccountNumber.append(new Random().nextInt(10));
         }
-        return cardAccountNumber.toString();
+        return Long.parseLong(cardAccountNumber.toString());
     };
 }
