@@ -2,6 +2,7 @@ package com.onlinebank.microservice.cardservice.controller;
 
 import com.onlinebank.microservice.cardservice.dto.BankCardDto;
 import com.onlinebank.microservice.cardservice.entity.impl.BankCard;
+import com.onlinebank.microservice.cardservice.service.abstrct.BankCardService;
 import com.onlinebank.microservice.cardservice.service.concrete.BankCardServiceImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -16,9 +17,9 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/bankcard")
 public class BankCardController {
-    private final BankCardServiceImpl bankCardService;
+    private final BankCardService bankCardService;
 
-    public BankCardController(BankCardServiceImpl bankCardService) {
+    public BankCardController(BankCardService bankCardService) {
         this.bankCardService = bankCardService;
     }
 
