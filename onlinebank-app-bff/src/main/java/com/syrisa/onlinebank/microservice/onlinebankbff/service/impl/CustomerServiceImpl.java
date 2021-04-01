@@ -1,8 +1,6 @@
 package com.syrisa.onlinebank.microservice.onlinebankbff.service.impl;
 
-import com.syrisa.onlinebank.microservice.onlinebankbff.client.CustomerServiceClient;
-import com.syrisa.onlinebank.microservice.onlinebankbff.client.DemandDepositAccountServiceClient;
-import com.syrisa.onlinebank.microservice.onlinebankbff.client.SavingsAccountServiceClient;
+import com.syrisa.onlinebank.microservice.onlinebankbff.client.*;
 import com.syrisa.onlinebank.microservice.onlinebankbff.dto.CustomerDto;
 import com.syrisa.onlinebank.microservice.onlinebankbff.dto.DemandDepositAccountDto;
 import com.syrisa.onlinebank.microservice.onlinebankbff.dto.SavingsAccountDto;
