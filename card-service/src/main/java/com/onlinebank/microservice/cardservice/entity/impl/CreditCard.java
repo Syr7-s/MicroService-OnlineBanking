@@ -29,8 +29,9 @@ public class CreditCard implements Card {
     private int cardDebt;
     @Enumerated(EnumType.STRING)
     private Currency currency;
+    private long userID;
 
-    public CreditCardDto toCreditCardDto(){
+    public CreditCardDto toCreditCardDto() {
         return CreditCardDto.builder()
                 .cardAccountNumber(this.cardAccountNumber)
                 .cardNameSurname(this.cardNameSurname)
@@ -40,6 +41,7 @@ public class CreditCard implements Card {
                 .cardLimit(this.cardLimit)
                 .cardDebt(this.cardDebt)
                 .currency(this.currency)
+                .userID(this.userID)
                 .build();
     }
 

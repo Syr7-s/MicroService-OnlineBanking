@@ -20,7 +20,7 @@ public class CreditCardDto {
     private int cardLimit;
     private int cardDebt;
     private Currency currency;
-
+    private long userID;
     public CreditCard toCreditCard(){
         return CreditCard.builder()
                 .cardAccountNumber(this.cardAccountNumber)
@@ -31,6 +31,7 @@ public class CreditCardDto {
                 .cardLimit(this.cardLimit)
                 .cardDebt(this.cardDebt)
                 .currency(this.currency)
+                .userID(this.userID)
                 .build();
     }
 }

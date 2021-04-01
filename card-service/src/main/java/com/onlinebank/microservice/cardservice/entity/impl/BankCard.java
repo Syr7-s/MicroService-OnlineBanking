@@ -22,6 +22,7 @@ public class BankCard implements Card {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate bankCardExpirationDate;
     private String bankCardSecurityCode;
+    private long userID;
 
     public BankCardDto toBankCardDto(){
         return BankCardDto.builder()
@@ -30,6 +31,7 @@ public class BankCard implements Card {
                 .bankCardPassword(this.bankCardPassword)
                 .bankCardExpirationDate(this.bankCardExpirationDate)
                 .bankCardSecurityCode(this.bankCardSecurityCode)
+                .userID(this.userID)
                 .build();
     }
 }
