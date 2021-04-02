@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BankCardRepository extends CrudRepository<BankCard, Long> {
     Page<BankCard> findAll(Pageable pageable);
+
+    BankCard findBankCardByUserID(long userID);
 }
