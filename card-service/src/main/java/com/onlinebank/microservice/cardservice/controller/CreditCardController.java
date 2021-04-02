@@ -50,9 +50,12 @@ public class CreditCardController {
     }
 
     @GetMapping("/credit/{userID}")
-    public CreditCardDto getCardByUserID(@PathVariable("userID") long userID) {
+    public List<CreditCardDto> getCardByUserID(@PathVariable("userID") long userID) {
         try {
-            return creditCardService.findCardByUserID(userID).toCreditCardDto();
+            return creditCardService.findCardsByUserID(userID)
+                    .stream()
+                    .map(CreditCard::toCreditCardDto)
+                    .collect(Collectors.toList());
         } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }

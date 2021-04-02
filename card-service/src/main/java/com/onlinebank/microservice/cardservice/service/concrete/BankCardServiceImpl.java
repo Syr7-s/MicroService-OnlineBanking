@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Transactional
 @Service
 public class BankCardServiceImpl implements BankCardService {
@@ -52,9 +54,13 @@ public class BankCardServiceImpl implements BankCardService {
     }
 
     @Override
-    public BankCard findCardByUserID(long userID) {
-        return bankCardRepository.findBankCardByUserID(userID)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Bank Card not found by userID"));
+    public List<BankCard> findCardsByUserID(long userID) {
+        List<BankCard> bankCards = bankCardRepository.findBankCardByUserID(userID);
+        if (!bankCards.isEmpty()) {
+            return bankCards;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cards not found.");
+        }
     }
 
     @Override

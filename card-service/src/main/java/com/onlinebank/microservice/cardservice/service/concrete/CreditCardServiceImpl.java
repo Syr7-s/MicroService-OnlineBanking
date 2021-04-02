@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class CreditCardServiceImpl implements CreditCardService {
@@ -44,9 +46,14 @@ public class CreditCardServiceImpl implements CreditCardService {
     }
 
     @Override
-    public CreditCard findCardByUserID(long userID) {
-        return creditCardRepository.findCreditCardByUserID(userID)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Credit Card not found by userID"));
+    public List<CreditCard> findCardsByUserID(long userID) {
+        List<CreditCard> creditCardList = creditCardRepository.findCreditCardByUserID(userID);
+        if (!creditCardList.isEmpty()) {
+            return creditCardList;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cards not found.");
+        }
+
     }
 
     @Override

@@ -6,11 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface BankCardRepository extends CrudRepository<BankCard, Long> {
     Page<BankCard> findAll(Pageable pageable);
 
-    Optional<BankCard> findBankCardByUserID(long userID);
+    List<BankCard> findBankCardByUserID(long userID);
 }

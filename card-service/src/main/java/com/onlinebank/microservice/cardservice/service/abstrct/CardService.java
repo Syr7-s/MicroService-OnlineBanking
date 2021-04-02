@@ -4,6 +4,7 @@ import com.onlinebank.microservice.cardservice.entity.Card;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 public interface CardService<T extends Card> {
     T create(T t);
 
@@ -11,7 +12,7 @@ public interface CardService<T extends Card> {
 
     T findCard(long cardNumber);
 
-    T findCardByUserID(long userID);
+    List<T> findCardsByUserID(long userID);
 
     String delete(long cardNumber);
 
