@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient("card-service")
 public interface CreditCardServiceClient {
-    @GetMapping("/api/v1/creditcard/{cardNumber}")
-    CreditCardDto get(@PathVariable("cardNumber") long cardNumber);
+    @GetMapping("/api/v1/creditcard/credit/{userID}")
+    CreditCardDto getCardByUserID(@PathVariable("userID") long userID);
 }
