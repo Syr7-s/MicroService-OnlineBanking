@@ -25,6 +25,8 @@ public class Customer implements Entity {
     private Address address;
     private List<DemandDepositAccount> demandDepositAccounts;
     private List<SavingsAccount> savingsAccounts;
+    private List<BankCard> bankCards;
+    private List<CreditCard> creditCards;
 
     public CustomerDto toCustomerDto() {
         return CustomerDto.builder()
