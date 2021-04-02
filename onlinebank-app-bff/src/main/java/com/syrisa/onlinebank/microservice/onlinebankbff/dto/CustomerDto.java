@@ -22,6 +22,8 @@ public class CustomerDto {
     private Address address;
     private List<DemandDepositAccount> demandDepositAccounts;
     private List<SavingsAccount> savingsAccounts;
+    private List<BankCard> bankCards;
+    private List<CreditCard> creditCards;
 
     public Customer toCustomer() {
         return Customer.builder()
@@ -36,6 +38,8 @@ public class CustomerDto {
                 .address(this.address)
                 .demandDepositAccounts(this.demandDepositAccounts)
                 .savingsAccounts(this.savingsAccounts)
+                .bankCards(this.bankCards)
+                .creditCards(this.creditCards)
                 .build();
     }
 }

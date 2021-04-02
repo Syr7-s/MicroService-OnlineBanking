@@ -41,6 +41,8 @@ public class Customer implements Entity {
                 .address(this.address)
                 .demandDepositAccounts(this.demandDepositAccounts)
                 .savingsAccounts(this.savingsAccounts)
+                .bankCards(this.bankCards)
+                .creditCards(this.creditCards)
                 .build();
     }
 }
