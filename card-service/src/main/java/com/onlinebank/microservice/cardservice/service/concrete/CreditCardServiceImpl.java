@@ -44,6 +44,12 @@ public class CreditCardServiceImpl implements CreditCardService {
     }
 
     @Override
+    public CreditCard findCardByUserID(long userID) {
+        return creditCardRepository.findCreditCardByUserID(userID)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Credit Card not found by userID"));
+    }
+
+    @Override
     public String delete(long cardNumber) {
         CreditCard creditCard = findCard(cardNumber);
         creditCardRepository.delete(creditCard);

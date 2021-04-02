@@ -52,6 +52,12 @@ public class BankCardServiceImpl implements BankCardService {
     }
 
     @Override
+    public BankCard findCardByUserID(long userID) {
+        return bankCardRepository.findBankCardByUserID(userID)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Bank Card not found by userID"));
+    }
+
+    @Override
     public String delete(long cardNumber) {
         BankCard bankCard = findCard(cardNumber);
         bankCardRepository.delete(bankCard);

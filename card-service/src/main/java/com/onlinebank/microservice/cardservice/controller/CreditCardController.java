@@ -49,6 +49,15 @@ public class CreditCardController {
         }
     }
 
+    @GetMapping("/credit/{userID}")
+    public CreditCardDto getCardByUserID(@PathVariable("userID") long userID) {
+        try {
+            return creditCardService.findCardByUserID(userID).toCreditCardDto();
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        }
+    }
+
     @DeleteMapping("/del/{cardNumber}")
     public String delete(@PathVariable("cardNumber") long cardNumber) {
         try {

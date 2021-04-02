@@ -11,8 +11,11 @@ public interface CardService<T extends Card> {
 
     T findCard(long cardNumber);
 
+    T findCardByUserID(long userID);
+
     String delete(long cardNumber);
 
     Page<T> cardPage(Pageable pageable);
+
 
 }
