@@ -78,12 +78,7 @@ public class SavingsAccountServiceImpl implements SavingsAccountService,
 
     @Override
     public List<SavingsAccount> getAccountByCustomers(long customerTC) {
-        List<SavingsAccount> savingsAccounts = savingsAccountRepository.getSavingsAccountsByCustomerTC(customerTC);
-        if (!savingsAccounts.isEmpty()) {
-            return savingsAccounts;
-        } else {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Customer have not accounts");
-        }
+        return savingsAccountRepository.getSavingsAccountsByCustomerTC(customerTC);
     }
 
     @Override

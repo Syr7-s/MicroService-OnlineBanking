@@ -80,12 +80,7 @@ public class DemandDepositAccountServiceImpl implements DemandDepositAccountServ
 
     @Override
     public List<DemandDepositAccount> getAccountByCustomers(long customerTC) {
-        List<DemandDepositAccount> demandDepositAccounts = demandDepositAccountRepository.getDemandDepositAccountsByCustomerTC(customerTC);
-        if (!demandDepositAccounts.isEmpty()) {
-            return demandDepositAccounts;
-        } else {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Customer have not accounts");
-        }
+        return demandDepositAccountRepository.getDemandDepositAccountsByCustomerTC(customerTC);
     }
 
     @Override
