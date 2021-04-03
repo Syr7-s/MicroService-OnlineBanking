@@ -55,12 +55,8 @@ public class BankCardServiceImpl implements BankCardService {
 
     @Override
     public List<BankCard> findCardsByUserID(long userID) {
-        List<BankCard> bankCards = bankCardRepository.findBankCardByUserID(userID);
-        if (!bankCards.isEmpty()) {
-            return bankCards;
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cards not found.");
-        }
+        return bankCardRepository.getBankCardsByUserID(userID);
+
     }
 
     @Override

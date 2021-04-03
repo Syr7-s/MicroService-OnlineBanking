@@ -12,5 +12,5 @@ import java.util.List;
 public interface CreditCardRepository extends CrudRepository<CreditCard, Long> {
     Page<CreditCard> findAll(Pageable pageable);
 
-    List<CreditCard> findCreditCardByUserID(long userID);
+    List<CreditCard> getCreditCardsByUserID(long userID);
 }

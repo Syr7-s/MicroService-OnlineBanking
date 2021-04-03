@@ -3,6 +3,8 @@ package com.onlinebank.microservice.cardservice.service.concrete;
 import com.onlinebank.microservice.cardservice.entity.impl.CreditCard;
 import com.onlinebank.microservice.cardservice.repository.CreditCardRepository;
 import com.onlinebank.microservice.cardservice.service.abstrct.CreditCardService;
+import com.onlinebank.microservice.cardservice.utility.generate.cardaccount.CardAccountNumber;
+import com.onlinebank.microservice.cardservice.utility.generate.securitycode.SecurityCode;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,8 @@ public class CreditCardServiceImpl implements CreditCardService {
 
     @Override
     public CreditCard create(CreditCard creditCard) {
+        creditCard.setCardAccountNumber(CardAccountNumber.generateCardAccountNumber.get());
+        creditCard.setSecurityCode(SecurityCode.securityCode.get());
         return creditCardRepository.save(creditCard);
     }
 
@@ -47,13 +51,7 @@ public class CreditCardServiceImpl implements CreditCardService {
 
     @Override
     public List<CreditCard> findCardsByUserID(long userID) {
-        List<CreditCard> creditCardList = creditCardRepository.findCreditCardByUserID(userID);
-        if (!creditCardList.isEmpty()) {
-            return creditCardList;
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cards not found.");
-        }
-
+        return creditCardRepository.getCreditCardsByUserID(userID);
     }
 
     @Override
